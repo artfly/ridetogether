@@ -5,7 +5,7 @@ import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.Section;
 import com.noveo.android.internship.ridetogether.app.rest.model.Event;
 import com.noveo.android.internship.ridetogether.app.rest.model.User;
-import com.noveo.android.internship.ridetogether.app.stub.EventStub;
+import com.noveo.android.internship.ridetogether.app.stub.RideTogetherStub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class EventUtil {
         List<User> users = new ArrayList<>(participants);
         users.addAll(subscribers);
         for (User user : users) {
-            if (user.getUsername().equals(EventStub.username)) {
+            if (user.getUsername().equals(RideTogetherStub.username)) {
                 return true;
             }
         }
@@ -37,7 +37,7 @@ public class EventUtil {
     public static int removeUser(List<Object> items) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) instanceof User &&
-                    ((User) items.get(i)).getUsername().equals(EventStub.username)) {
+                    ((User) items.get(i)).getUsername().equals(RideTogetherStub.username)) {
                 items.remove(i);
                 return i;
             }

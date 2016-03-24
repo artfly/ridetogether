@@ -16,9 +16,6 @@ import com.noveo.android.internship.ridetogether.app.view.viewholder.UserViewHol
 
 import java.util.List;
 
-/**
- * Created by arty on 19.03.16.
- */
 public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int EVENT_TYPE = 0;
     private final int SECTION_TYPE = 1;

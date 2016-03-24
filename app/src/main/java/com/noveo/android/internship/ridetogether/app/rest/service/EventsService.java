@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface EventsService {
 
-    @GET("events/{event_id}")
-    Call<Event> getEvent(@Path("event_id") int eventId);
+    @GET("events/{eventId}")
+    Call<Event> getEvent(@Path("eventId") int eventId);
 
     @GET("events")
     Call<List<Event>> getEvents(@Query("count") Integer count,
@@ -19,16 +19,16 @@ public interface EventsService {
     @POST("events")
     Call<Event> postEvent(@Header("Token") String token, @Body RequestEvent event);
 
-    @DELETE("events/{event_id}")
-    Call<Void> deleteEvent(@Path("event_id") int eventId, @Header("Token") String token);
+    @DELETE("events/{eventId}")
+    Call<Void> deleteEvent(@Path("eventId") int eventId, @Header("Token") String token);
 
-    @PUT("events/{event_id}")
-    Call<Event> updateEvent(@Path("event_id") int eventId,
+    @PUT("events/{eventId}")
+    Call<Event> updateEvent(@Path("eventId") int eventId,
                             @Header("Token") String token, @Body Event event);
 
-    @PUT("events/{event_id}/subscribe")
-    Call<Event> subscribeToEvent(@Path("event_id") int eventId, @Header("Token") String token);
+    @PUT("events/{eventId}/subscribe")
+    Call<Event> subscribeToEvent(@Path("eventId") int eventId, @Header("Token") String token);
 
-    @DELETE("events/{event_id}/unsubscribe")
-    Call<Void> unsubscribeFromEvent(@Path("event_id") int eventId, @Header("Token") String token);
+    @DELETE("events/{eventId}/unsubscribe")
+    Call<Void> unsubscribeFromEvent(@Path("eventId") int eventId, @Header("Token") String token);
 }

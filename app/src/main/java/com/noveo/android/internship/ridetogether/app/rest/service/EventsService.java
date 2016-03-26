@@ -1,7 +1,7 @@
 package com.noveo.android.internship.ridetogether.app.rest.service;
 
-import com.noveo.android.internship.ridetogether.app.rest.model.Event;
-import com.noveo.android.internship.ridetogether.app.rest.model.RequestEvent;
+import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
+import com.noveo.android.internship.ridetogether.app.model.request.RequestEvent;
 import retrofit2.Call;
 import retrofit2.http.*;
 

@@ -25,67 +25,69 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="#3f51b5"
+                    android:textStyle="bold"
                     android:typeface="serif"
                     android:layout_margin="@dimen/default_margin_medium"
-                    android:text="Awesome road"
+                    android:textColor="@color/material_grey_900"
                     android:textSize="@dimen/route_title_text_size"/>
+
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/default_margin_large"
+                    android:layout_marginRight="@dimen/default_margin_large"
                     android:orientation="horizontal">
-                <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:orientation="vertical">
-                    <TextView
-                            android:id="@+id/route_distance"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="6.7"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:textColor="@color/light_blue"
-                            android:textSize="@dimen/route_rating_text_size"/>
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:text="Distance (km)"
-                            android:gravity="center"
-                            android:layout_height="wrap_content"/>
-                </LinearLayout>
 
-                <LinearLayout
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/icon_route_height"
+                        android:layout_weight="0.4"
+                        android:src="@drawable/ic_regular_biking_96"/>
+
+                <TextView
+                        android:id="@+id/route_distance"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_weight="0.5"
-                        android:orientation="vertical">
-                    <TextView
-                            android:id="@+id/route_rating"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="5.0"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:textColor="@color/light_blue"
-                            android:textSize="@dimen/route_rating_text_size"/>
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:text="Rating"
-                            android:gravity="center"
-                            android:layout_height="wrap_content"/>
-                </LinearLayout>
+                        android:gravity="start"
+                        android:textStyle="bold"
+                        android:layout_weight="0.6"
+                        android:textColor="@color/accent"
+                        android:textSize="@dimen/route_rating_text_size"/>
+
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/default_margin_large"
+                    android:layout_marginRight="@dimen/default_margin_large"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/icon_route_height"
+                        android:layout_weight="0.4"
+                        android:src="@drawable/ic_star_96"/>
+
+                <TextView
+                        android:id="@+id/route_rating"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textStyle="bold"
+                        android:layout_weight="0.6"
+                        android:textColor="@color/accent"
+                        android:textSize="@dimen/route_rating_text_size"/>
             </LinearLayout>
 
             <TextView
                     android:id="@+id/route_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/material_grey_800"
                     android:layout_margin="@dimen/default_margin_medium"
-                    android:textSize="@dimen/route_desc_text_size"
-                    android:text="@string/lorem_ipsum"/>
+                    android:textSize="@dimen/route_desc_text_size"/>
 
         </LinearLayout>
 

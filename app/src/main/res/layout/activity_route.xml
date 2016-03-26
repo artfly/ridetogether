@@ -8,27 +8,43 @@
         android:gravity="bottom"
         sothree:umanoPanelHeight="@dimen/visible_dragview_size"
         sothree:umanoShadowHeight="@dimen/dragview_shadow_height"
-        sothree:umanoParallaxOffset="100dp"
+        sothree:umanoParallaxOffset="@dimen/umano_parallax_offset"
         sothree:umanoDragView="@+id/route_info"
         sothree:umanoOverlay="true"
         sothree:umanoScrollableView="@+id/route_list">
 
-    <FrameLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             xmlns:android="http://schemas.android.com/apk/res/android">
 
+        <android.support.design.widget.AppBarLayout
+                android:id="@+id/route_appbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:fitsSystemWindows="true">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/route_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:theme="@style/ToolbarStyle"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                xmlns:app="http://schemas.android.com/apk/res-auto"/>
+        </android.support.design.widget.AppBarLayout>
         <fragment
                 android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
-                tools:context="com.noveo.android.internship.ridetogether.app.RouteActivity"
+                tools:context="com.noveo.android.internship.ridetogether.app.ui.activity.RouteActivity"
                 android:name="com.google.android.gms.maps.SupportMapFragment">
         </fragment>
 
-    </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
             android:id="@+id/route_info"
@@ -41,19 +57,20 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/visible_dragview_size"
+                android:background="@color/primary"
                 android:orientation="horizontal">
             <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:src="@drawable/arrow_up"/>
+                    android:layout_weight="0.1"
+                    android:src="@drawable/ic_navigation_expand_less"/>
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:text="@string/drag_route_info"
-                    android:layout_weight="0.7"/>
+                    android:layout_weight="0.9"/>
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/route_list"

@@ -1,9 +1,9 @@
 package com.noveo.android.internship.ridetogether.app.rest.service;
 
-import com.noveo.android.internship.ridetogether.app.rest.model.route.Comment;
-import com.noveo.android.internship.ridetogether.app.rest.model.route.RequestComment;
-import com.noveo.android.internship.ridetogether.app.rest.model.route.RequestRoute;
-import com.noveo.android.internship.ridetogether.app.rest.model.route.Route;
+import com.noveo.android.internship.ridetogether.app.model.request.RequestComment;
+import com.noveo.android.internship.ridetogether.app.model.request.RequestRoute;
+import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
+import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
 import retrofit2.Call;
 import retrofit2.http.*;
 

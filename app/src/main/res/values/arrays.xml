@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fragments_titles">
+        <item>@string/all</item>
+        <item>@string/today</item>
+        <item>@string/tomorrow</item>
+        <item>@string/this_week</item>
+        <item>@string/this_month</item>
+    </string-array>
+</resources>

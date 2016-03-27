@@ -9,6 +9,7 @@ import com.noveo.android.internship.ridetogether.app.model.response.event.User;
 import com.noveo.android.internship.ridetogether.app.ui.view.Section;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,18 +35,79 @@ public class EventUtil {
         return false;
     }
 
-    public static int removeUser(List<Object> items) {
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) instanceof User &&
-                    ((User) items.get(i)).getUsername().equals(RideTogetherStub.username)) {
-                items.remove(i);
-                return i;
-            }
-        }
-        return -1;
-    }
-
     public static CharSequence dateToString(Date date) {
         return DateFormat.format("dd.MM.yyyy HH:mm", date);
+    }
+
+    public static CharSequence dateToTimedString(Date date, Context context) {
+        Calendar now = Calendar.getInstance();
+        Calendar eventCal = Calendar.getInstance();
+        eventCal.setTime(date);
+        CharSequence format = "dd.MM.yyyy HH:mm";
+
+        if ((now.get(Calendar.ERA) != eventCal.get(Calendar.ERA))) {
+            return DateFormat.format("dd.MM.yyyy HH:mm", date);
+        }
+
+        if (now.get(Calendar.DAY_OF_YEAR) == eventCal.get(Calendar.DAY_OF_YEAR) &&
+                now.get(Calendar.YEAR) == eventCal.get(Calendar.YEAR)) {
+            return context.getString(R.string.today) + ", " + DateFormat.format("HH:mm", date);
+        }
+        now.add(Calendar.DAY_OF_MONTH, 1);
+        if (now.get(Calendar.DAY_OF_YEAR) == eventCal.get(Calendar.DAY_OF_YEAR) &&
+                now.get(Calendar.YEAR) == eventCal.get(Calendar.YEAR)) {
+            return context.getString(R.string.tomorrow) + ", " + DateFormat.format("HH:mm", date);
+        }
+        now.add(Calendar.DAY_OF_MONTH, -1);
+        if (now.get(Calendar.YEAR) == eventCal.get(Calendar.YEAR) &&
+                now.get(Calendar.WEEK_OF_YEAR) == eventCal.get(Calendar.WEEK_OF_YEAR)) {
+            return DateFormat.format("EEEE, HH:mm", date);
+        }
+        return dateToString(date);
+    }
+
+    public static List<Event> getDateInRange(List<Event> events, Range range) {
+        if (range == Range.ANY) {
+            return events;
+        }
+        Calendar now = Calendar.getInstance();
+        Calendar eventCal = Calendar.getInstance();
+        List<Event> eventsInRange = new ArrayList<>();
+        for (Event event : events) {
+            eventCal.setTime(event.getDate());
+            if (now.get(Calendar.ERA) != eventCal.get(Calendar.ERA) ||
+                    now.get(Calendar.YEAR) != eventCal.get(Calendar.YEAR)) {
+                continue;
+            }
+
+            switch (range) {
+                case TODAY:
+                    if (now.get(Calendar.DAY_OF_YEAR) == eventCal.get(Calendar.DAY_OF_YEAR)) {
+                        eventsInRange.add(event);
+                    }
+                    break;
+                case TOMORROW:
+                    now.add(Calendar.DAY_OF_MONTH, 1);
+                    if (now.get(Calendar.DAY_OF_YEAR) == eventCal.get(Calendar.DAY_OF_YEAR)) {
+                        eventsInRange.add(event);
+                    }
+                    now.add(Calendar.DAY_OF_MONTH, -1);
+                    break;
+                case WEEK:
+                    if (now.get(Calendar.WEEK_OF_YEAR) == eventCal.get(Calendar.WEEK_OF_YEAR)) {
+                        eventsInRange.add(event);
+                    }
+                    break;
+                case MONTH:
+                    if (now.get(Calendar.MONTH) == eventCal.get(Calendar.MONTH)) {
+                        eventsInRange.add(event);
+                    }
+            }
+        }
+        return eventsInRange;
+    }
+
+    public enum Range {
+        TODAY, TOMORROW, WEEK, MONTH, ANY
     }
 }

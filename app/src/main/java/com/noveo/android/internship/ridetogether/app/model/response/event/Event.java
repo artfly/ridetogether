@@ -12,6 +12,8 @@ public class Event {
     int routeId;
     @SerializedName("creator_id")
     int creatorId;
+    @SerializedName("image_path")
+    String imagePath;
     Date date;
     String description;
     List<User> participants;
@@ -23,7 +25,7 @@ public class Event {
     }
 
     public Event(int id, int routeId, Date date, List<User> participants,
-                 List<User> subscribers, String description, String title) {
+                 List<User> subscribers, String description, String title, String imagePath) {
         this.id = id;
         this.routeId = routeId;
         this.date = date;
@@ -31,6 +33,7 @@ public class Event {
         this.subscribers = subscribers;
         this.description = description;
         this.title = title;
+        this.imagePath = imagePath;
     }
 
     public int getId() {
@@ -63,5 +66,9 @@ public class Event {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

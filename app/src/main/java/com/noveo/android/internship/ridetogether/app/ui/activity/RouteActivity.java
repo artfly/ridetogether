@@ -125,6 +125,7 @@ public class RouteActivity extends AppCompatActivity implements OnMapReadyCallba
         if (actionBar != null) {
             actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         }
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package com.noveo.android.internship.ridetogether.app.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -17,6 +18,7 @@ import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.event.*;
+import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
 import com.noveo.android.internship.ridetogether.app.model.service.BusProvider;
 import com.noveo.android.internship.ridetogether.app.ui.utils.EventUtil;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventActivity extends AppCompatActivity {
+    private final static String EVENT_TAG = "EVENT_TAG";
     @Bind(R.id.event_list)
     RecyclerView eventView;
     @Bind(R.id.toolbar)
@@ -41,7 +44,14 @@ public class EventActivity extends AppCompatActivity {
     private List<Object> items = new ArrayList<>();
     private EventAdapter adapter;
     private Bus bus = BusProvider.getInstance();
+    private Event event;
     private Route route;
+
+    public static Intent createIntent(final Context context, final Event event) {
+        final Intent intent = new Intent(context, EventActivity.class);
+        intent.putExtra(EVENT_TAG, Parcels.wrap(event));
+        return intent;
+    }
 
     @OnClick(R.id.route_fab)
     public void showRoute() {
@@ -75,6 +85,12 @@ public class EventActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         collapsingToolbar.setTitle(getString(R.string.app_name));
 
+        event = Parcels.unwrap(getIntent().getParcelableExtra(EVENT_TAG));
+        if (event != null) {
+            EventUtil.updateItems(items, event, this);
+            collapsingToolbar.setTitle(event.getTitle());
+        }
+
         eventView.setHasFixedSize(true);
         eventView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EventAdapter(items, this);
@@ -85,14 +101,12 @@ public class EventActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         bus.register(this);
-        bus.post(new GetRideEvent());
         bus.post(new GetRouteEvent());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //TODO : cancel calls
         bus.unregister(this);
     }
 

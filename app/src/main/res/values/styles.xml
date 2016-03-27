@@ -22,7 +22,7 @@
     <style name="FabStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/ic_polygon_96</item>
+        <item name="android:src">@drawable/ic_google_maps3</item>
         <item name="elevation">@dimen/design_fab_elevation</item>
         <item name="pressedTranslationZ">@dimen/design_fab_translation_z_pressed</item>
         <item name="rippleColor">@color/primary_dark</item>

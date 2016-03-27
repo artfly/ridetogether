@@ -48,6 +48,21 @@ public class EventManager {
     }
 
     @Subscribe
+    public void onGetRideEvents(GetRideEvents event) {
+        Call<List<Event>> eventsCall = eventsService.getEvents(null, null, null);
+        eventsCall.enqueue(new BaseCallback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (!response.isSuccessful()) {
+                    Log.d(LOG_TAG, "Get event error : " + response.errorBody());
+                    return;
+                }
+                bus.post(new ReceiveRideEvents(response.body()));
+            }
+        });
+    }
+
+    @Subscribe
     public void onSubscribeEvent(SubscribeEvent event) {
         if (event.getAction().equals(context.getString(R.string.subscribe))) {
             Call<Event> subscribeCall = eventsService

@@ -7,6 +7,8 @@ import org.parceler.Parcel;
 public class RequestEvent {
     @SerializedName("route_id")
     int routeId;
+    @SerializedName("image_path")
+    String imagePath;
     String description;
     String title;
     int date;
@@ -14,11 +16,12 @@ public class RequestEvent {
     public RequestEvent() {
     }
 
-    public RequestEvent(int routeId, String description, String title, int date) {
+    public RequestEvent(int routeId, String description, String title, int date, String imagePath) {
         this.routeId = routeId;
         this.description = description;
         this.title = title;
         this.date = date;
+        this.imagePath = imagePath;
     }
 
     public int getRouteId() {
@@ -35,5 +38,9 @@ public class RequestEvent {
 
     public int getDate() {
         return date;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

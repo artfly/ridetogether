@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_events"
+                android:icon="@drawable/ic_maps_directions_bike"
+                android:title="@string/events" />
+        <item
+                android:id="@+id/nav_map"
+                android:icon="@drawable/ic_action_room"
+                android:title="@string/map" />
+        <item
+                android:id="@+id/nav_create_event"
+                android:icon="@drawable/ic_content_add_circle_outline"
+                android:title="@string/create_event" />
+        <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_action_perm_identity"
+                android:title="@string/profile" />
+    </group>
+
+    <item android:title="@string/action_settings">
+        <menu>
+            <item
+                    android:icon="@drawable/ic_action_settings"
+                    android:title="@string/action_settings" />
+            <item
+                    android:icon="@drawable/ic_action_exit_to_app"
+                    android:title="@string/Logout" />
+        </menu>
+    </item>
+
+</menu>

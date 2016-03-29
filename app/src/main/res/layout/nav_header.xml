@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_header_height"
+        android:background="?attr/colorAccent"
+        android:paddingLeft="@dimen/drawer_padding"
+        android:paddingRight="@dimen/drawer_padding"
+        android:paddingStart="@dimen/drawer_padding"
+        android:layout_marginBottom="@dimen/drawer_margin_areas"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:orientation="vertical"
+        android:gravity="bottom">
+    <ImageView
+            android:layout_width="@dimen/drawer_avatar_width"
+            android:layout_height="@dimen/drawer_avatar_height"/>
+    <TextView
+            android:paddingTop="@dimen/drawer_subtitle_padding"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/drawer_subtitle_height"
+            android:textSize="@dimen/drawer_text_size"
+            android:text="Username"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+</LinearLayout>

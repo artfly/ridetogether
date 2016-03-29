@@ -1,11 +1,16 @@
 package com.noveo.android.internship.ridetogether.app.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.noveo.android.internship.ridetogether.app.R;
@@ -30,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements EventStaggeredVie
     Toolbar toolbar;
     @Bind(R.id.tabs)
     TabLayout tabLayout;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
 
     private EventsPagerAdapter adapter;
     private List<Event> events = new ArrayList<>();
@@ -70,18 +79,43 @@ public class MainActivity extends AppCompatActivity implements EventStaggeredVie
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_navigation_menu);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        setupDrawer();
 
         setupViewPager(event);
         tabLayout.setupWithViewPager(pager);
     }
 
+    private void setupDrawer() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

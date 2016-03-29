@@ -38,6 +38,20 @@
 
     <dimen name="expanded_title_margin_start">48dp</dimen>
     <dimen name="expanded_title_margin_end">64dp</dimen>
+    
+    <dimen name="drawer_padding">16dp</dimen>
+    <dimen name="drawer_item_margin_left">72dp</dimen>
+    <dimen name="drawer_icon_width">36dp</dimen>
+    <dimen name="drawer_icon_height">36dp</dimen>
+    <dimen name="drawer_margin_areas">8dp</dimen>
+    <dimen name="drawer_item_width">48dp</dimen>
+    <dimen name="drawer_subtitle_width">56dp</dimen>
+    <dimen name="drawer_text_size">14dp</dimen>
+    <dimen name="drawer_header_height">134dp</dimen>
+    <dimen name="drawer_subtitle_height">56dp</dimen>
+    <dimen name="drawer_subtitle_padding">14dp</dimen>
+    <dimen name="drawer_avatar_height">60dp</dimen>
+    <dimen name="drawer_avatar_width">60dp</dimen>
 
     <dimen name="avatar_width">80dp</dimen>
     <dimen name="avatar_height">80dp</dimen>

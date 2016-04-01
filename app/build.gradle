@@ -11,6 +11,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
@@ -51,5 +52,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.sothree.slidinguppanel:library:3.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
     apt 'org.parceler:parceler:1.0.4'
 }

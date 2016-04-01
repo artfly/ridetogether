@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.noveo.android.internship.ridetogether.app.R;
+import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
 import com.noveo.android.internship.ridetogether.app.ui.view.Section;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.User;
@@ -25,10 +26,10 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int EVENT_TYPE = 0;
     private final int SECTION_TYPE = 1;
     private final int USER_TYPE = 2;
-    private List<Object> items;
+    private List<EventBased> items;
     private Context context;
 
-    public EventAdapter(List<Object> items, Context context) {
+    public EventAdapter(List<EventBased> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -58,7 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         switch (viewType) {
             case EVENT_TYPE:
                 View eventView = inflater.inflate(R.layout.list_item_event, viewGroup, false);
-                viewHolder = new EventViewHolder(eventView);
+                viewHolder = new EventViewHolder(eventView, context);
                 break;
             case SECTION_TYPE:
                 View sectionView = inflater.inflate(R.layout.list_item_section, viewGroup, false);

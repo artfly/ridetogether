@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Parcel
-public class Event {
+public class Event implements EventBased {
     @SerializedName("route_id")
     int routeId;
     @SerializedName("creator_id")

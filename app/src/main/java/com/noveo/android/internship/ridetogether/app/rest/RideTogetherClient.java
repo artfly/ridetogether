@@ -3,6 +3,8 @@ package com.noveo.android.internship.ridetogether.app.rest;
 import com.google.gson.*;
 import com.noveo.android.internship.ridetogether.app.rest.service.EventsService;
 import com.noveo.android.internship.ridetogether.app.rest.service.RoutesService;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -37,8 +39,13 @@ public class RideTogetherClient {
         });
         Gson gson = builder.create();
 
-        retrofit = new Retrofit.Builder()
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

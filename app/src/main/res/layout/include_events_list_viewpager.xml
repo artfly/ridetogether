@@ -14,7 +14,7 @@
                 android:id="@+id/eventslist_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
                 app:layout_scrollFlags="scroll|enterAlways"
                 xmlns:app="http://schemas.android.com/apk/res-auto">
             <TextView

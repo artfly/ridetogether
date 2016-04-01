@@ -3,6 +3,7 @@ package com.noveo.android.internship.ridetogether.app.ui.view.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +13,22 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.noveo.android.internship.ridetogether.app.R;
+import com.noveo.android.internship.ridetogether.app.model.event.RideClickEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
+import com.noveo.android.internship.ridetogether.app.model.service.BusProvider;
 import com.noveo.android.internship.ridetogether.app.ui.utils.EventUtil;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.EventStaggeredViewHolder;
+import com.noveo.android.internship.ridetogether.app.ui.view.holder.EventStaggeredViewHolder.EventClickListener;
 
 import java.util.List;
 
-public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredViewHolder> {
+public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredViewHolder> implements EventClickListener {
     private List<Event> events;
     private Context context;
-    private EventStaggeredViewHolder.EventClickListener listener;
 
-    public EventStaggeredAdapter(List<Event> events, Context context,
-                                 EventStaggeredViewHolder.EventClickListener listener) {
+    public EventStaggeredAdapter(List<Event> events, Context context) {
         this.events = events;
         this.context = context;
-        this.listener = listener;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredVi
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View eventView = inflater.inflate(R.layout.list_item_event_staggered, parent, false);
 
-        return new EventStaggeredViewHolder(eventView, listener);
+        return new EventStaggeredViewHolder(eventView, this);
     }
 
     @Override
@@ -72,5 +73,12 @@ public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredVi
     @Override
     public int getItemCount() {
         return events.size();
+    }
+
+
+    @Override
+    public void onEventClick(int position) {
+        Log.d("ADAPTER", "CLICK");
+        BusProvider.getInstance().post(new RideClickEvent(events.get(position)));
     }
 }

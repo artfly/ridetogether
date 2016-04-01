@@ -1,9 +1,9 @@
 package com.noveo.android.internship.ridetogether.app.ui.view;
 
-/**
- * Created by arty on 19.03.16.
- */
-public class Section {
+import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
+
+
+public class Section implements EventBased {
 
     public String title;
 

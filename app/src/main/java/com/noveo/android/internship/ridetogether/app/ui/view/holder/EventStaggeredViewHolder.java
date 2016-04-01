@@ -29,10 +29,10 @@ public class EventStaggeredViewHolder extends RecyclerView.ViewHolder implements
 
     @Override
     public void onClick(View v) {
-        listener.onEventClick((int) getAdapterPosition());
+        listener.onEventClick(getAdapterPosition());
     }
 
     public interface EventClickListener {
-        public void onEventClick(int position);
+        void onEventClick(int position);
     }
 }

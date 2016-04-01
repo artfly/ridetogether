@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 @Parcel
-public class User {
+public class User implements EventBased {
     String username;
     @SerializedName("user_id")
     int userId;

@@ -5,6 +5,7 @@ import android.text.format.DateFormat;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.RideTogetherStub;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
+import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
 import com.noveo.android.internship.ridetogether.app.model.response.event.User;
 import com.noveo.android.internship.ridetogether.app.ui.view.Section;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class EventUtil {
 
-    public static void updateItems(List<Object> items, Event event, Context context) {
+    public static void updateItems(List<EventBased> items, Event event, Context context) {
         items.clear();
         items.add(event);
         items.add(new Section(context.getString(R.string.participants)));

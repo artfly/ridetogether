@@ -9,6 +9,6 @@ public abstract class BaseCallback<T> implements Callback<T> {
 
     @Override
     public void onFailure(Call call, Throwable t) {
-        Log.e(LOG_TAG, t.getMessage());
+        Log.e(LOG_TAG, t.toString());
     }
 }

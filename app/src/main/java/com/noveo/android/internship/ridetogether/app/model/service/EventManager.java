@@ -16,55 +16,31 @@ import com.squareup.otto.Subscribe;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class EventManager {
+import static com.noveo.android.internship.ridetogether.app.model.service.BaseCallback.LOG_TAG;
+
+public class EventManager implements Manager {
     private Context context;
-    private Bus bus;
+    private Bus bus = BusProvider.getInstance();
     private EventsService eventsService;
     private RoutesService routesService;
 
-    public EventManager(Context context, Bus bus) {
-        this.context = context;
-        this.bus = bus;
+    public EventManager() {
         RideTogetherClient client = RideTogetherClient.getInstance();
         this.eventsService = client.getEventsService();
         this.routesService = client.getRoutesService();
     }
 
-    @Subscribe
-    public void onGetRideEvent(GetRideEvent event) {
-        Call<Event> eventCall = eventsService.getEvent(RideTogetherStub.eventId);
-        eventCall.enqueue(new BaseCallback<Event>() {
-            @Override
-            public void onResponse(Call<Event> call, Response<Event> response) {
-                if (!response.isSuccessful()) {
-                    Log.d(LOG_TAG, "Get event error : " + response.errorBody());
-                    return;
-                }
-                bus.post(new ReceiveRideEvent(response.body()));
-            }
-        });
+    @Override
+    public void setContext(Context context) {
+        this.context = context;
     }
 
-    @Subscribe
-    public void onGetRideEvents(GetRideEvents event) {
-        Call<List<Event>> eventsCall = eventsService.getEvents(null, null, null);
-        eventsCall.enqueue(new BaseCallback<List<Event>>() {
-            @Override
-            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                if (!response.isSuccessful()) {
-                    Log.d(LOG_TAG, "Get event error : " + response.errorBody());
-                    return;
-                }
-                bus.post(new ReceiveRideEvents(response.body()));
-            }
-        });
-    }
-
-    @Subscribe
-    public void onSubscribeEvent(SubscribeEvent event) {
-        if (event.getAction().equals(context.getString(R.string.subscribe))) {
+    @Override
+    public void subscribe(CharSequence action) {
+        if (action.toString().equals(context.getString(R.string.subscribe))) {
             Call<Event> subscribeCall = eventsService
                     .subscribeToEvent(RideTogetherStub.eventId, RideTogetherStub.token);
             subscribeCall.enqueue(new BaseCallback<Event>() {
@@ -87,29 +63,45 @@ public class EventManager {
                         Log.d(LOG_TAG, "Get event error : " + response.errorBody());
                         return;
                     }
-                    onGetRideEvent(null);
+                    getEvent();
                 }
             });
         }
     }
 
-    @Subscribe
-    public void onGetRouteEvent(GetRouteEvent event) {
-        Call<Route> routeCall = routesService.getRoute(RideTogetherStub.routeId);
-        routeCall.enqueue(new BaseCallback<Route>() {
+    @Override
+    public void getEvents() {
+        Call<List<Event>> eventsCall = eventsService.getEvents(null, null, null);
+        eventsCall.enqueue(new BaseCallback<List<Event>>() {
             @Override
-            public void onResponse(Call<Route> call, Response<Route> response) {
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                Log.d(LOG_TAG, "Response!");
                 if (!response.isSuccessful()) {
-                    Log.d(LOG_TAG, "Get route error : " + response.errorBody());
+                    Log.d(LOG_TAG, "Get event error : " + response.errorBody());
                     return;
                 }
-                bus.post(new ReceiveRouteEvent(response.body()));
+                bus.post(new ReceiveRideEvents(response.body()));
             }
         });
     }
 
-    @Subscribe
-    public void onGetCommentsEvent(GetCommentsEvent event) {
+    @Override
+    public void getEvent() {
+        Call<List<Event>> eventsCall = eventsService.getEvents(null, null, null);
+        eventsCall.enqueue(new BaseCallback<List<Event>>() {
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                if (!response.isSuccessful()) {
+                    Log.d(LOG_TAG, "Get event error : " + response.errorBody());
+                    return;
+                }
+                bus.post(new ReceiveRideEvents(response.body()));
+            }
+        });
+    }
+
+    @Override
+    public void getComments() {
         Call<List<Comment>> commentsCall = routesService.
                 getComments(RideTogetherStub.routeId, null, null, null);
         commentsCall.enqueue(new BaseCallback<List<Comment>>() {
@@ -120,6 +112,21 @@ public class EventManager {
                     return;
                 }
                 bus.post(new ReceiveCommentsEvent(response.body()));
+            }
+        });
+    }
+
+    @Override
+    public void getRoute() {
+        Call<Route> routeCall = routesService.getRoute(RideTogetherStub.routeId);
+        routeCall.enqueue(new BaseCallback<Route>() {
+            @Override
+            public void onResponse(Call<Route> call, Response<Route> response) {
+                if (!response.isSuccessful()) {
+                    Log.d(LOG_TAG, "Get route error : " + response.errorBody());
+                    return;
+                }
+                bus.post(new ReceiveRouteEvent(response.body()));
             }
         });
     }

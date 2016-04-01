@@ -21,13 +21,12 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventsListFragment extends Fragment {
+public class EventsListFragment extends BaseFragment {
     private static final String EVENTS_TAG = "EVENTS_TAG";
     @Bind(R.id.events_list)
     RecyclerView eventsView;
     private List<Event> events = new ArrayList<>();
     private EventStaggeredAdapter adapter;
-    private EventClickListener listener;
 
     public static EventsListFragment newInstance(List<Event> events) {
         EventsListFragment fragment = new EventsListFragment();
@@ -47,28 +46,20 @@ public class EventsListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_events_list, container, false);
-        ButterKnife.bind(this, view);
-        try {
-            this.listener = (EventClickListener) getActivity();
-        } catch (ClassCastException e) {
-            Log.e(getClass().getSimpleName(), "The activity should implement EventClickListener interface", e);
-        }
+        return inflater.inflate(R.layout.fragment_events_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setupRecyclerView();
-        return view;
     }
 
     private void setupRecyclerView() {
-        adapter = new EventStaggeredAdapter(events, getActivity(), listener);
+        adapter = new EventStaggeredAdapter(events, getActivity());
         StaggeredGridLayoutManager manager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         eventsView.setAdapter(adapter);
         eventsView.setLayoutManager(manager);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

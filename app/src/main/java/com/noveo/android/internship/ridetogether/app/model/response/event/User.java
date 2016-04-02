@@ -31,4 +31,9 @@ public class User implements EventBased {
     public String getImagePath() {
         return imagePath;
     }
+
+    @Override
+    public EventViewType getViewType() {
+        return EventViewType.USER;
+    }
 }

@@ -11,21 +11,20 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.noveo.android.internship.ridetogether.app.R;
-import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
-import com.noveo.android.internship.ridetogether.app.ui.view.Section;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
+import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
+import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased.EventViewType;
 import com.noveo.android.internship.ridetogether.app.model.response.event.User;
-import com.noveo.android.internship.ridetogether.app.ui.utils.EventUtil;
+import com.noveo.android.internship.ridetogether.app.ui.view.Section;
+import com.noveo.android.internship.ridetogether.app.ui.view.holder.ErrorViewHolder;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.EventViewHolder;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.SectionViewHolder;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.UserViewHolder;
+import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
 
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final int EVENT_TYPE = 0;
-    private final int SECTION_TYPE = 1;
-    private final int USER_TYPE = 2;
     private List<EventBased> items;
     private Context context;
 
@@ -41,14 +40,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        if (items.get(position) instanceof User) {
-            return USER_TYPE;
-        } else if (items.get(position) instanceof Event) {
-            return EVENT_TYPE;
-        } else if (items.get(position) instanceof Section) {
-            return SECTION_TYPE;
-        }
-        return -1;
+        return items.get(position).getViewType().ordinal();
     }
 
     @Override
@@ -56,18 +48,22 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
-        switch (viewType) {
-            case EVENT_TYPE:
+        switch (EventViewType.values()[viewType]) {
+            case EVENT:
                 View eventView = inflater.inflate(R.layout.list_item_event, viewGroup, false);
                 viewHolder = new EventViewHolder(eventView, context);
                 break;
-            case SECTION_TYPE:
+            case SECTION:
                 View sectionView = inflater.inflate(R.layout.list_item_section, viewGroup, false);
                 viewHolder = new SectionViewHolder(sectionView);
                 break;
-            default:
+            case USER:
                 View userView = inflater.inflate(R.layout.list_item_user, viewGroup, false);
                 viewHolder = new UserViewHolder(userView);
+                break;
+            default:
+                View errorView = inflater.inflate(R.layout.list_item_error, viewGroup, false);
+                viewHolder = new ErrorViewHolder(errorView);
                 break;
         }
         return viewHolder;
@@ -75,16 +71,16 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        switch (viewHolder.getItemViewType()) {
-            case EVENT_TYPE:
+        switch (EventViewType.values()[viewHolder.getItemViewType()]) {
+            case EVENT:
                 EventViewHolder eventViewHolder = (EventViewHolder) viewHolder;
                 configureEventViewHolder(eventViewHolder, position);
                 break;
-            case SECTION_TYPE:
+            case SECTION:
                 SectionViewHolder sectionViewHolder = (SectionViewHolder) viewHolder;
                 configureSectionViewHolder(sectionViewHolder, position);
                 break;
-            default:
+            case USER:
                 UserViewHolder userViewHolder = (UserViewHolder) viewHolder;
                 configureUserViewHolder(userViewHolder, position);
                 break;
@@ -102,6 +98,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         User user = (User) items.get(position);
         if (user != null) {
             holder.username.setText(user.getUsername());
+            //TODO : separate class
             Glide.with(context)
                     .load(user.getImagePath())
                     .asBitmap()

@@ -15,10 +15,10 @@ import com.bumptech.glide.request.target.Target;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.event.RideClickEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
-import com.noveo.android.internship.ridetogether.app.model.service.BusProvider;
-import com.noveo.android.internship.ridetogether.app.ui.utils.EventUtil;
+import com.noveo.android.internship.ridetogether.app.providers.BusProvider;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.EventStaggeredViewHolder;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.EventStaggeredViewHolder.EventClickListener;
+import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
 
 import java.util.List;
 
@@ -78,7 +78,7 @@ public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredVi
 
     @Override
     public void onEventClick(int position) {
-        Log.d("ADAPTER", "CLICK");
+
         BusProvider.getInstance().post(new RideClickEvent(events.get(position)));
     }
 }

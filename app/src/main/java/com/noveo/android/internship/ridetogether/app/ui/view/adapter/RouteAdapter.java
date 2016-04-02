@@ -14,20 +14,20 @@ import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Properties;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.ui.utils.RouteUtil;
+import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.CommentViewHolder;
+import com.noveo.android.internship.ridetogether.app.ui.view.holder.ErrorViewHolder;
 import com.noveo.android.internship.ridetogether.app.ui.view.holder.RouteViewHolder;
+import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
+import com.noveo.android.internship.ridetogether.app.utils.RouteUtil;
 
 import java.util.List;
 
 public class RouteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private final int ROUTE_TYPE = 0;
-    private final int COMMENT_TYPE = 1;
-    private List<Object> items;
+    private List<RouteBased> items;
     private Context context;
 
-    public RouteAdapter(List<Object> items, Context context) {
+    public RouteAdapter(List<RouteBased> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -37,28 +37,33 @@ public class RouteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        switch (viewType) {
-            case ROUTE_TYPE:
+        switch (RouteBased.RouteViewType.values()[viewType]) {
+            case ROUTE:
                 View routeView = inflater.inflate(R.layout.list_item_route, parent, false);
                 viewHolder = new RouteViewHolder(routeView);
                 break;
-            default:
+            case COMMENT:
                 View commentView = inflater.inflate(R.layout.list_item_comment, parent, false);
                 viewHolder = new CommentViewHolder(commentView);
+                break;
+            default:
+                View errorView = inflater.inflate(R.layout.list_item_error, parent, false);
+                viewHolder = new ErrorViewHolder(errorView);
         }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        switch (viewHolder.getItemViewType()) {
-            case ROUTE_TYPE:
+        switch (RouteBased.RouteViewType.values()[viewHolder.getItemViewType()]) {
+            case ROUTE:
                 RouteViewHolder routeViewHolder = (RouteViewHolder) viewHolder;
                 configureRouteViewHolder(routeViewHolder, position);
                 break;
-            default:
+            case COMMENT:
                 CommentViewHolder commentViewHolder = (CommentViewHolder) viewHolder;
                 configureCommentViewHolder(commentViewHolder, position);
+                break;
         }
     }
 
@@ -90,19 +95,14 @@ public class RouteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             holder.avatar.setImageDrawable(circular);
                         }
                     });
-            holder.date.setText(RouteUtil.dateToString(comment.getDate()));
+            holder.date.setText(EventUtil.dateToString(comment.getDate()));
             holder.text.setText(comment.getContent().getText());
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (items.get(position) instanceof Route) {
-            return ROUTE_TYPE;
-        } else if (items.get(position) instanceof Comment) {
-            return COMMENT_TYPE;
-        }
-        return -1;
+        return items.get(position).getViewType().ordinal();
     }
 
     @Override

@@ -1,6 +1,7 @@
-package com.noveo.android.internship.ridetogether.app.ui.utils;
+package com.noveo.android.internship.ridetogether.app.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.RideTogetherStub;
@@ -14,7 +15,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class EventUtil {
+public final class EventUtil {
+    public static final CharSequence fullDateFormat = "dd.MM.yyyy HH:mm";
+    public static final CharSequence dayAndTimeFormat = "EEEE, HH:mm";
+    public static final CharSequence timeOnlyFormat = "HH:mm";
+
+    private EventUtil() {
+    }
 
     public static void updateItems(List<EventBased> items, Event event, Context context) {
         items.clear();
@@ -29,7 +36,7 @@ public class EventUtil {
         List<User> users = new ArrayList<>(participants);
         users.addAll(subscribers);
         for (User user : users) {
-            if (user.getUsername().equals(RideTogetherStub.username)) {
+            if (TextUtils.equals(user.getUsername(), RideTogetherStub.username)) {
                 return true;
             }
         }
@@ -37,32 +44,31 @@ public class EventUtil {
     }
 
     public static CharSequence dateToString(Date date) {
-        return DateFormat.format("dd.MM.yyyy HH:mm", date);
+        return DateFormat.format(fullDateFormat, date);
     }
 
     public static CharSequence dateToTimedString(Date date, Context context) {
         Calendar now = Calendar.getInstance();
         Calendar eventCal = Calendar.getInstance();
         eventCal.setTime(date);
-        CharSequence format = "dd.MM.yyyy HH:mm";
 
         if ((now.get(Calendar.ERA) != eventCal.get(Calendar.ERA))) {
-            return DateFormat.format("dd.MM.yyyy HH:mm", date);
+            return DateFormat.format(fullDateFormat, date);
         }
 
         if (now.get(Calendar.DAY_OF_YEAR) == eventCal.get(Calendar.DAY_OF_YEAR) &&
                 now.get(Calendar.YEAR) == eventCal.get(Calendar.YEAR)) {
-            return context.getString(R.string.today) + ", " + DateFormat.format("HH:mm", date);
+            return context.getString(R.string.today) + ", " + DateFormat.format(timeOnlyFormat, date);
         }
         now.add(Calendar.DAY_OF_MONTH, 1);
         if (now.get(Calendar.DAY_OF_YEAR) == eventCal.get(Calendar.DAY_OF_YEAR) &&
                 now.get(Calendar.YEAR) == eventCal.get(Calendar.YEAR)) {
-            return context.getString(R.string.tomorrow) + ", " + DateFormat.format("HH:mm", date);
+            return context.getString(R.string.tomorrow) + ", " + DateFormat.format(timeOnlyFormat, date);
         }
         now.add(Calendar.DAY_OF_MONTH, -1);
         if (now.get(Calendar.YEAR) == eventCal.get(Calendar.YEAR) &&
                 now.get(Calendar.WEEK_OF_YEAR) == eventCal.get(Calendar.WEEK_OF_YEAR)) {
-            return DateFormat.format("EEEE, HH:mm", date);
+            return DateFormat.format(dayAndTimeFormat, date);
         }
         return dateToString(date);
     }

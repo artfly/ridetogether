@@ -1,10 +1,9 @@
 package com.noveo.android.internship.ridetogether.app;
 
 import android.app.Application;
-import com.noveo.android.internship.ridetogether.app.model.service.BusProvider;
-import com.noveo.android.internship.ridetogether.app.model.service.EventManager;
-import com.noveo.android.internship.ridetogether.app.model.service.Manager;
-import com.noveo.android.internship.ridetogether.app.model.service.ManagerProvider;
+import com.noveo.android.internship.ridetogether.app.providers.BusProvider;
+import com.noveo.android.internship.ridetogether.app.controllers.Manager;
+import com.noveo.android.internship.ridetogether.app.providers.ManagerProvider;
 import com.squareup.otto.Bus;
 
 public class RideTogetherApplication extends Application {

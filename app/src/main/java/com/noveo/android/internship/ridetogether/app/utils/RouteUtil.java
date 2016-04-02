@@ -1,16 +1,18 @@
-package com.noveo.android.internship.ridetogether.app.ui.utils;
+package com.noveo.android.internship.ridetogether.app.utils;
 
 import android.location.Location;
-import android.text.format.DateFormat;
 import com.google.android.gms.maps.model.LatLng;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
+import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
 
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 
-public class RouteUtil {
+public final class RouteUtil {
+
+    private RouteUtil() {
+    }
 
     public static String getRouteDistance(List<List<Double>> coordinates) {
         float[] result = new float[1];
@@ -25,19 +27,16 @@ public class RouteUtil {
         return new DecimalFormat("#.#").format(totalResult / 1000) + " km";
     }
 
-    public static CharSequence dateToString(Date date) {
-        return DateFormat.format("dd.MM.yyyy HH:mm", date);
-    }
-
-    public static void addRouteToItems(List<Object> items, Route route) {
-        if (items.size() > 0 && items.get(0) instanceof Route) {
+    public static void addRouteToItems(List<RouteBased> items, Route route) {
+        if (items.size() > 0 && items.get(0).getViewType() == RouteBased.RouteViewType.ROUTE) {
             items.clear();
         }
         items.add(0, route);
     }
 
-    public static void addCommentsToItems(List<Object> items, List<Comment> comments) {
-        if (items.size() > 1 || (items.size() == 1 && items.get(0) instanceof Comment)) {
+    public static void addCommentsToItems(List<RouteBased> items, List<Comment> comments) {
+        if (items.size() > 1 ||
+                (items.size() == 1 && items.get(0).getViewType() == RouteBased.RouteViewType.COMMENT)) {
             items.clear();
         }
         items.addAll(comments);

@@ -1,10 +1,8 @@
 package com.noveo.android.internship.ridetogether.app.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,16 +11,17 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import com.noveo.android.internship.ridetogether.app.R;
-import com.noveo.android.internship.ridetogether.app.model.event.*;
+import com.noveo.android.internship.ridetogether.app.controllers.Manager;
+import com.noveo.android.internship.ridetogether.app.model.event.ReceiveRideEvent;
+import com.noveo.android.internship.ridetogether.app.model.event.ReceiveRouteEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.model.service.Manager;
-import com.noveo.android.internship.ridetogether.app.model.service.ManagerProvider;
-import com.noveo.android.internship.ridetogether.app.ui.utils.EventUtil;
-import com.noveo.android.internship.ridetogether.app.ui.utils.IntentUtil;
-import com.noveo.android.internship.ridetogether.app.ui.utils.MapUtil;
+import com.noveo.android.internship.ridetogether.app.providers.ManagerProvider;
 import com.noveo.android.internship.ridetogether.app.ui.view.adapter.EventAdapter;
+import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
+import com.noveo.android.internship.ridetogether.app.utils.IntentUtil;
+import com.noveo.android.internship.ridetogether.app.utils.MapUtil;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;

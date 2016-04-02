@@ -1,4 +1,4 @@
-package com.noveo.android.internship.ridetogether.app.ui.utils;
+package com.noveo.android.internship.ridetogether.app.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,13 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
-public class IntentUtil {
+public final class IntentUtil {
     public static final String EVENTS_TAG = "EVENTS_TAG";
     public static final String EVENT_TAG = "EVENT_TAG";
     public static final String ROUTE_TAG = "ROUTE_TAG";
+
+    private IntentUtil() {
+    }
 
     public static Intent createIntent(final Context context, final List<Event> events) {
         final Intent intent = new Intent(context, MainActivity.class);
@@ -44,6 +47,6 @@ public class IntentUtil {
     }
 
     public static List<Event> getEvents(final Intent intent) {
-        return ((Events)Parcels.unwrap(intent.getParcelableExtra(EVENTS_TAG))).getEvents();
+        return ((Events) Parcels.unwrap(intent.getParcelableExtra(EVENTS_TAG))).getEvents();
     }
 }

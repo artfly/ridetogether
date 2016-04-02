@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+            android:id="@+id/main_group"
+            android:checkableBehavior="single">
         <item
                 android:id="@+id/nav_events"
                 android:icon="@drawable/ic_maps_directions_bike"
@@ -20,15 +22,15 @@
                 android:title="@string/profile" />
     </group>
 
-    <item android:title="@string/action_settings">
-        <menu>
+    <group
+            android:id="@+id/settings_group"
+            android:checkableBehavior="single">
             <item
                     android:icon="@drawable/ic_action_settings"
                     android:title="@string/action_settings" />
             <item
                     android:icon="@drawable/ic_action_exit_to_app"
                     android:title="@string/Logout" />
-        </menu>
-    </item>
+    </group>
 
 </menu>

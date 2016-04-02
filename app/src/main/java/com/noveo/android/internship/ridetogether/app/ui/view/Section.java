@@ -10,4 +10,9 @@ public class Section implements EventBased {
     public Section(String title) {
         this.title = title;
     }
+
+    @Override
+    public EventViewType getViewType() {
+        return EventViewType.SECTION;
+    }
 }

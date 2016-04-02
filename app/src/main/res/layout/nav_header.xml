@@ -12,12 +12,15 @@
         android:orientation="vertical"
         android:gravity="bottom">
     <ImageView
+            android:id="@+id/header_userimage"
             android:layout_width="@dimen/drawer_avatar_width"
             android:layout_height="@dimen/drawer_avatar_height"/>
     <TextView
-            android:paddingTop="@dimen/drawer_subtitle_padding"
+            android:id="@+id/header_username"
             android:layout_width="match_parent"
             android:layout_height="@dimen/drawer_subtitle_height"
+            android:textStyle="bold"
+            android:paddingTop="@dimen/drawer_subtitle_padding"
             android:textSize="@dimen/drawer_text_size"
             android:text="Username"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>

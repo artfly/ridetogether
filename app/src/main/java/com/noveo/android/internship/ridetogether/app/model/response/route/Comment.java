@@ -7,7 +7,7 @@ import org.parceler.Parcel;
 import java.util.Date;
 
 @Parcel
-public class Comment {
+public class Comment implements RouteBased {
     @SerializedName("added_at")
     Date date;
     RequestComment content;
@@ -51,5 +51,10 @@ public class Comment {
 
     public String getCreatorName() {
         return creatorName;
+    }
+
+    @Override
+    public RouteViewType getViewType() {
+        return RouteViewType.COMMENT;
     }
 }

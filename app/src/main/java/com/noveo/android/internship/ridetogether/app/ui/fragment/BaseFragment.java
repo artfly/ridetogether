@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import butterknife.ButterKnife;
-import com.noveo.android.internship.ridetogether.app.model.service.BusProvider;
+import com.noveo.android.internship.ridetogether.app.providers.BusProvider;
 import com.squareup.otto.Bus;
 
 public abstract class BaseFragment extends Fragment {

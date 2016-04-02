@@ -3,7 +3,7 @@ package com.noveo.android.internship.ridetogether.app.model.response.route;
 import org.parceler.Parcel;
 
 @Parcel
-public class Route {
+public class Route implements RouteBased {
     String type;
     Properties properties;
     LineString geometry;
@@ -27,5 +27,10 @@ public class Route {
 
     public LineString getGeometry() {
         return geometry;
+    }
+
+    @Override
+    public RouteViewType getViewType() {
+        return RouteViewType.ROUTE;
     }
 }

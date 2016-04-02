@@ -1,4 +1,4 @@
-package com.noveo.android.internship.ridetogether.app.ui.utils;
+package com.noveo.android.internship.ridetogether.app.utils;
 
 
 import android.graphics.Color;
@@ -8,29 +8,32 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.*;
-import com.google.gson.Gson;
 import com.google.maps.android.geojson.GeoJsonFeature;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.google.maps.android.geojson.GeoJsonLineString;
 import com.google.maps.android.geojson.GeoJsonLineStringStyle;
 import com.noveo.android.internship.ridetogether.app.model.response.route.LineString;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
+import com.noveo.android.internship.ridetogether.app.providers.GsonSingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class MapUtil {
+public final class MapUtil {
     private static final String MAP_TAG = "MAP_TAG";
     private static final String MAP_AUTHORITY = "www.maps.google.com";
     // forest green
     private static final String MARKER_COLOR_HEX = "228b22";
-    private static float MARKER_COLOR_HUE = 80;
     private static final String ROUTE_COLOR = "blue";
     private static final int ROUTE_COLOR_INT = Color.BLUE;
     private static final int ROUTE_WEIGHT = 4;
+    private static float MARKER_COLOR_HUE = 80;
 
-    static String generateMarkers(List<List<Double>> coordinates) {
+    private MapUtil() {
+    }
+
+    public static String generateMarkers(List<List<Double>> coordinates) {
         String markers = "color:0x" + MARKER_COLOR_HEX;
         List<Double> startCoordinate = coordinates.get(0);
         List<Double> endCoordinate = coordinates.get(coordinates.size() - 1);
@@ -74,13 +77,13 @@ public class MapUtil {
                 .icon(BitmapDescriptorFactory.defaultMarker(MARKER_COLOR_HUE)));
     }
 
-    public static void addRouteToMap(final GoogleMap map, Route route) {
+    public static GeoJsonLayer addRouteToMap(final GoogleMap map, Route route) {
         JSONObject routeObject;
         try {
-            routeObject = new JSONObject((new Gson()).toJson(route));
+            routeObject = new JSONObject((GsonSingleton.INSTANCE.getGSON()).toJson(route));
         } catch (JSONException e) {
             Log.e(MAP_TAG, "Error : cannot convert json");
-            return;
+            return null;
         }
         GeoJsonLayer layer = new GeoJsonLayer(map, routeObject);
 
@@ -89,8 +92,12 @@ public class MapUtil {
         lineStringStyle.setColor(ROUTE_COLOR_INT);
         layer.getFeatures().iterator().next().setLineStringStyle(lineStringStyle);
 
-        final CameraUpdate update = getLineStringPosition(layer);
         layer.addLayerToMap();
+        return layer;
+    }
+
+    public static void animateCameraToRoute(final GoogleMap map, GeoJsonLayer layer) {
+        final CameraUpdate update = getLineStringPosition(layer);
         if (update != null) {
             map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
                 @Override

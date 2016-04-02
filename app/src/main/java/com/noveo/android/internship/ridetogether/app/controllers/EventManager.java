@@ -1,25 +1,26 @@
-package com.noveo.android.internship.ridetogether.app.model.service;
+package com.noveo.android.internship.ridetogether.app.controllers;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.RideTogetherStub;
-import com.noveo.android.internship.ridetogether.app.model.event.*;
+import com.noveo.android.internship.ridetogether.app.model.event.ReceiveCommentsEvent;
+import com.noveo.android.internship.ridetogether.app.model.event.ReceiveRideEvent;
+import com.noveo.android.internship.ridetogether.app.model.event.ReceiveRideEvents;
+import com.noveo.android.internship.ridetogether.app.model.event.ReceiveRouteEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
+import com.noveo.android.internship.ridetogether.app.providers.BusProvider;
 import com.noveo.android.internship.ridetogether.app.rest.RideTogetherClient;
 import com.noveo.android.internship.ridetogether.app.rest.service.EventsService;
 import com.noveo.android.internship.ridetogether.app.rest.service.RoutesService;
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.noveo.android.internship.ridetogether.app.model.service.BaseCallback.LOG_TAG;
 
 public class EventManager implements Manager {
     private Context context;
@@ -40,7 +41,7 @@ public class EventManager implements Manager {
 
     @Override
     public void subscribe(CharSequence action) {
-        if (action.toString().equals(context.getString(R.string.subscribe))) {
+        if (TextUtils.equals(action, context.getString(R.string.subscribe))) {
             Call<Event> subscribeCall = eventsService
                     .subscribeToEvent(RideTogetherStub.eventId, RideTogetherStub.token);
             subscribeCall.enqueue(new BaseCallback<Event>() {

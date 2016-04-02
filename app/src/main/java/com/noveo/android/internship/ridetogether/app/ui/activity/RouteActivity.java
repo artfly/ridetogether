@@ -10,14 +10,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
+import com.google.maps.android.geojson.GeoJsonLayer;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.event.ReceiveCommentsEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.model.service.Manager;
-import com.noveo.android.internship.ridetogether.app.model.service.ManagerProvider;
-import com.noveo.android.internship.ridetogether.app.ui.utils.IntentUtil;
-import com.noveo.android.internship.ridetogether.app.ui.utils.MapUtil;
-import com.noveo.android.internship.ridetogether.app.ui.utils.RouteUtil;
+import com.noveo.android.internship.ridetogether.app.controllers.Manager;
+import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
+import com.noveo.android.internship.ridetogether.app.providers.ManagerProvider;
+import com.noveo.android.internship.ridetogether.app.utils.IntentUtil;
+import com.noveo.android.internship.ridetogether.app.utils.MapUtil;
+import com.noveo.android.internship.ridetogether.app.utils.RouteUtil;
 import com.noveo.android.internship.ridetogether.app.ui.view.adapter.RouteAdapter;
 import com.squareup.otto.Subscribe;
 
@@ -37,7 +39,7 @@ public class RouteActivity extends BaseActivity implements OnMapReadyCallback {
     private Marker startMarker;
     private Marker endMarker;
 
-    private List<Object> items = new ArrayList<>();
+    private List<RouteBased> items = new ArrayList<>();
     private RouteAdapter adapter;
 
     @Override
@@ -85,7 +87,8 @@ public class RouteActivity extends BaseActivity implements OnMapReadyCallback {
         if (route != null) {
             startMarker = MapUtil.addMarker(startMarker, map, route, RouteUtil.getStartLatLng(route));
             endMarker = MapUtil.addMarker(endMarker, map, route, RouteUtil.getEndLatLng(route));
-            MapUtil.addRouteToMap(map, route);
+            GeoJsonLayer layer = MapUtil.addRouteToMap(map, route);
+            MapUtil.animateCameraToRoute(map, layer);
         }
     }
 

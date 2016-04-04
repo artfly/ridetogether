@@ -31,7 +31,7 @@
                     android:layout_height="match_parent"
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:tools="http://schemas.android.com/tools"
-                    tools:context="com.noveo.android.internship.ridetogether.app.ui.activity.RouteActivity"
+                    tools:context="com.noveo.android.internship.ridetogether.app.view.activity.RouteActivity"
                     android:name="com.google.android.gms.maps.SupportMapFragment">
             </fragment>
         </LinearLayout>

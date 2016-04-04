@@ -14,7 +14,7 @@ import com.google.maps.android.geojson.GeoJsonLineString;
 import com.google.maps.android.geojson.GeoJsonLineStringStyle;
 import com.noveo.android.internship.ridetogether.app.model.response.route.LineString;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.providers.GsonSingleton;
+import com.noveo.android.internship.ridetogether.app.model.rest.GsonSingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 

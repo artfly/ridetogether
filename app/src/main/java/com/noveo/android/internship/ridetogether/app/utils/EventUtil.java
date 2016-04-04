@@ -8,7 +8,7 @@ import com.noveo.android.internship.ridetogether.app.model.RideTogetherStub;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
 import com.noveo.android.internship.ridetogether.app.model.response.event.User;
-import com.noveo.android.internship.ridetogether.app.ui.view.Section;
+import com.noveo.android.internship.ridetogether.app.view.viewgroup.Section;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,7 +73,7 @@ public final class EventUtil {
         return dateToString(date);
     }
 
-    public static List<Event> getDateInRange(List<Event> events, Range range) {
+    public static List<Event> getEventsInRange(List<Event> events, Range range) {
         if (range == Range.ANY) {
             return events;
         }
@@ -112,6 +112,20 @@ public final class EventUtil {
             }
         }
         return eventsInRange;
+    }
+
+    public static Range getRange(String title, Context context) {
+        Range range = EventUtil.Range.ANY;
+        if (TextUtils.equals(title, context.getResources().getString(R.string.today))) {
+            range = EventUtil.Range.TODAY;
+        } else if (TextUtils.equals(title, context.getResources().getString(R.string.tomorrow))) {
+            range = EventUtil.Range.TOMORROW;
+        } else if (TextUtils.equals(title, context.getResources().getString(R.string.this_week))) {
+            range = EventUtil.Range.WEEK;
+        } else if (TextUtils.equals(title, context.getResources().getString(R.string.this_month))) {
+            range = EventUtil.Range.MONTH;
+        }
+        return range;
     }
 
     public enum Range {

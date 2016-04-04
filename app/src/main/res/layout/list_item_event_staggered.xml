@@ -15,7 +15,7 @@
                 android:gravity="center"
                 android:layout_margin="@dimen/default_margin"
                 android:orientation="vertical">
-            <com.noveo.android.internship.ridetogether.app.ui.view.DynamicHeightImageView
+            <com.noveo.android.internship.ridetogether.app.view.viewgroup.DynamicHeightImageView
                     android:id="@+id/event_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

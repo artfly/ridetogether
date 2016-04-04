@@ -5,9 +5,9 @@ import android.content.Intent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Events;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.ui.activity.EventActivity;
-import com.noveo.android.internship.ridetogether.app.ui.activity.MainActivity;
-import com.noveo.android.internship.ridetogether.app.ui.activity.RouteActivity;
+import com.noveo.android.internship.ridetogether.app.view.activity.EventActivity;
+import com.noveo.android.internship.ridetogether.app.view.activity.MainActivity;
+import com.noveo.android.internship.ridetogether.app.view.activity.RouteActivity;
 import org.parceler.Parcels;
 
 import java.util.List;
@@ -16,6 +16,7 @@ public final class IntentUtil {
     public static final String EVENTS_TAG = "EVENTS_TAG";
     public static final String EVENT_TAG = "EVENT_TAG";
     public static final String ROUTE_TAG = "ROUTE_TAG";
+    public static final String ROUTE_ID_TAG = "EVENT_ID_TAG";
 
     private IntentUtil() {
     }
@@ -32,9 +33,10 @@ public final class IntentUtil {
         return intent;
     }
 
-    public static Intent createIntent(final Context context, final Route route) {
+    public static Intent createIntent(final Context context, final Route route, final int routeId) {
         final Intent intent = new Intent(context, RouteActivity.class);
         intent.putExtra(ROUTE_TAG, Parcels.wrap(route));
+        intent.putExtra(ROUTE_ID_TAG, routeId);
         return intent;
     }
 
@@ -48,5 +50,9 @@ public final class IntentUtil {
 
     public static List<Event> getEvents(final Intent intent) {
         return ((Events) Parcels.unwrap(intent.getParcelableExtra(EVENTS_TAG))).getEvents();
+    }
+
+    public static int getRouteId(final Intent intent) {
+        return intent.getIntExtra(ROUTE_ID_TAG, -1);
     }
 }

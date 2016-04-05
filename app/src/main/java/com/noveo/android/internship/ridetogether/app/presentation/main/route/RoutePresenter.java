@@ -1,24 +1,21 @@
-package com.noveo.android.internship.ridetogether.app.presenter;
+package com.noveo.android.internship.ridetogether.app.presentation.main.route;
 
 import com.noveo.android.internship.ridetogether.app.model.rest.RideTogetherClient;
 import com.noveo.android.internship.ridetogether.app.model.rest.service.RoutesService;
-import com.noveo.android.internship.ridetogether.app.view.activity.RouteMvpView;
-import rx.Subscription;
-import rx.schedulers.Schedulers;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BasePresenter;
+import com.noveo.android.internship.ridetogether.app.presentation.common.SchedulerTransformer;
 
-public class RoutePresenter implements Presenter<RouteMvpView> {
-    private RouteMvpView routeMvpView;
-    private Subscription subscription;
+public class RoutePresenter extends BasePresenter<RouteView> {
     private RoutesService routesService;
 
     @Override
-    public void attachView(RouteMvpView routeMvpView) {
-        this.routeMvpView = routeMvpView;
+    public void attachView(RouteView routeMvpView) {
+        this.view = routeMvpView;
     }
 
     @Override
     public void detachView() {
-        this.routeMvpView = null;
+        this.view = null;
         if (subscription != null) {
             subscription.unsubscribe();
         }
@@ -31,6 +28,6 @@ public class RoutePresenter implements Presenter<RouteMvpView> {
         }
         subscription = routesService.getComments(routeId, null, null, null)
                 .compose(SchedulerTransformer.applySchedulers())
-                .subscribe(comments -> routeMvpView.showComments(comments));
+                .subscribe(comments -> view.showComments(comments));
     }
 }

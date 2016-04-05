@@ -1,4 +1,4 @@
-package com.noveo.android.internship.ridetogether.app.view.activity;
+package com.noveo.android.internship.ridetogether.app.presentation.main.events;
 
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -22,11 +22,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.RideTogetherStub;
-import com.noveo.android.internship.ridetogether.app.presenter.EventListPresenter;
-import com.noveo.android.internship.ridetogether.app.view.bus.event.RefreshEvent;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BaseActivity;
 import com.noveo.android.internship.ridetogether.app.view.bus.event.RideClickEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
-import com.noveo.android.internship.ridetogether.app.view.fragment.EventsListFragment;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.adapter.EventsPagerAdapter;
 import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
 import com.noveo.android.internship.ridetogether.app.utils.IntentUtil;
@@ -35,7 +33,7 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseMvpActivity implements EventListMvpView {
+public class EventsActivity extends BaseActivity {
     @Bind(R.id.viewpager)
     ViewPager pager;
     @Bind(R.id.eventslist_toolbar)
@@ -44,23 +42,12 @@ public class MainActivity extends BaseMvpActivity implements EventListMvpView {
     TabLayout tabLayout;
     @Bind(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+
     @Bind(R.id.nav_view)
     NavigationView navigationView;
     private EventsPagerAdapter adapter;
     private List<Event> events = new ArrayList<>();
     private ActionBarDrawerToggle toggle;
-
-    private EventListPresenter presenter = new EventListPresenter();
-
-    @Override
-    public void attachPresenter() {
-        presenter.attachView(this);
-    }
-
-    @Override
-    public void detachPresenter() {
-        presenter.detachView();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +69,7 @@ public class MainActivity extends BaseMvpActivity implements EventListMvpView {
         EventUtil.Range range;
         for (String title : titles) {
             range = EventUtil.getRange(title, this);
-            adapter.addFragment(EventsListFragment.newInstance(EventUtil.getEventsInRange(events, range)), title);
+            adapter.addFragment(EventsFragment.newInstance(EventUtil.getEventsInRange(events, range), range), title);
         }
         pager.setAdapter(adapter);
 
@@ -94,13 +81,10 @@ public class MainActivity extends BaseMvpActivity implements EventListMvpView {
         View headerView = navigationView.getHeaderView(0);
         final TextView username = (TextView) headerView.findViewById(R.id.header_username);
         final ImageView userimage = (ImageView) headerView.findViewById(R.id.header_userimage);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                item.setChecked(true);
-                drawerLayout.closeDrawers();
-                return true;
-            }
+        navigationView.setNavigationItemSelectedListener(item -> {
+            item.setChecked(true);
+            drawerLayout.closeDrawers();
+            return true;
         });
         username.setText(RideTogetherStub.username);
         Glide.with(this)
@@ -154,17 +138,5 @@ public class MainActivity extends BaseMvpActivity implements EventListMvpView {
     @Subscribe
     public void onEventClick(RideClickEvent event) {
         startActivity(IntentUtil.createIntent(this, event.getEvent()));
-    }
-
-    @Subscribe
-    public void onRefresh(RefreshEvent event) {
-        presenter.loadEventList();
-    }
-
-    @Override
-    public void showEvents(List<Event> events) {
-        this.events.clear();
-        this.events.addAll(events);
-        setupViewPager();
     }
 }

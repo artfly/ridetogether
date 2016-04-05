@@ -5,9 +5,9 @@ import android.content.Intent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Events;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.view.activity.EventActivity;
-import com.noveo.android.internship.ridetogether.app.view.activity.MainActivity;
-import com.noveo.android.internship.ridetogether.app.view.activity.RouteActivity;
+import com.noveo.android.internship.ridetogether.app.presentation.main.event.EventActivity;
+import com.noveo.android.internship.ridetogether.app.presentation.main.events.EventsActivity;
+import com.noveo.android.internship.ridetogether.app.presentation.main.route.RouteActivity;
 import org.parceler.Parcels;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public final class IntentUtil {
     }
 
     public static Intent createIntent(final Context context, final List<Event> events) {
-        final Intent intent = new Intent(context, MainActivity.class);
+        final Intent intent = new Intent(context, EventsActivity.class);
         intent.putExtra(EVENTS_TAG, Parcels.wrap(new Events(events)));
         return intent;
     }

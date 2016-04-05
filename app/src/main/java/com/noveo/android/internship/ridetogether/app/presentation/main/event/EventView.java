@@ -1,10 +1,11 @@
-package com.noveo.android.internship.ridetogether.app.view.activity;
+package com.noveo.android.internship.ridetogether.app.presentation.main.event;
 
 
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BaseView;
 
-public interface EventMvpView extends MvpView {
+public interface EventView extends BaseView {
     void showRoute(Route route);
 
     void showEvent(Event event);

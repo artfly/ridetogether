@@ -1,15 +1,11 @@
-package com.noveo.android.internship.ridetogether.app.view.activity;
+package com.noveo.android.internship.ridetogether.app.presentation.common;
 
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-public abstract class BaseMvpActivity extends BaseActivity implements MvpView {
-
-    public abstract void attachPresenter();
-
-    public abstract void detachPresenter();
+public abstract class BaseViewActivity extends BaseActivity implements BaseView {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

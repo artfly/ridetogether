@@ -15,7 +15,7 @@ public interface EventsService {
 
     @GET("events")
     Observable<List<Event>> getEvents(@Query("count") Integer count,
-                                @Query("since") Integer since, @Query("region") Integer region);
+                                @Query("since") Long since, @Query("region") Integer region);
 
     @POST("events")
     Observable<Event> postEvent(@Header("Token") String token, @Body RequestEvent event);

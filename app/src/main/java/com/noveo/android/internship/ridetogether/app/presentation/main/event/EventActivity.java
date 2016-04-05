@@ -1,4 +1,4 @@
-package com.noveo.android.internship.ridetogether.app.view.activity;
+package com.noveo.android.internship.ridetogether.app.presentation.main.event;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
-import com.noveo.android.internship.ridetogether.app.presenter.EventPresenter;
-import com.noveo.android.internship.ridetogether.app.presenter.Presenter;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BaseActivity;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BaseViewActivity;
 import com.noveo.android.internship.ridetogether.app.view.bus.event.SubscribeEvent;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.adapter.EventAdapter;
 import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
@@ -27,7 +27,7 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventActivity extends BaseMvpActivity implements EventMvpView {
+public class EventActivity extends BaseViewActivity implements EventView {
     @Bind(R.id.event_list)
     RecyclerView eventView;
     @Bind(R.id.toolbar)

@@ -128,6 +128,33 @@ public final class EventUtil {
         return range;
     }
 
+    public static long rangeToSince(Range range) {
+        Calendar calendar = Calendar.getInstance();
+        switch (range) {
+            case TODAY:
+                return getStartOfDay(calendar).getTime();
+            case TOMORROW:
+                calendar.add(Calendar.DATE, 1);
+                return getStartOfDay(calendar).getTime();
+            case WEEK:
+                calendar.set(Calendar.DAY_OF_WEEK, calendar.getFirstDayOfWeek());
+                return getStartOfDay(calendar).getTime();
+            case MONTH:
+                calendar.set(Calendar.DAY_OF_MONTH, 1);
+                return getStartOfDay(calendar).getTime();
+            default:
+                return 0;
+        }
+    }
+
+    private static Date getStartOfDay(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
     public enum Range {
         TODAY, TOMORROW, WEEK, MONTH, ANY
     }

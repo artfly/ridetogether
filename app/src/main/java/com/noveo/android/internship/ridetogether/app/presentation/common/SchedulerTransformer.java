@@ -1,4 +1,4 @@
-package com.noveo.android.internship.ridetogether.app.presenter;
+package com.noveo.android.internship.ridetogether.app.presentation.common;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

@@ -1,4 +1,4 @@
-package com.noveo.android.internship.ridetogether.app.view.activity;
+package com.noveo.android.internship.ridetogether.app.presentation.main.route;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -12,11 +12,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.google.maps.android.geojson.GeoJsonLayer;
 import com.noveo.android.internship.ridetogether.app.R;
-import com.noveo.android.internship.ridetogether.app.model.RideTogetherStub;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
 import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
-import com.noveo.android.internship.ridetogether.app.presenter.RoutePresenter;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BaseActivity;
+import com.noveo.android.internship.ridetogether.app.presentation.common.BaseViewActivity;
 import com.noveo.android.internship.ridetogether.app.utils.IntentUtil;
 import com.noveo.android.internship.ridetogether.app.utils.MapUtil;
 import com.noveo.android.internship.ridetogether.app.utils.RouteUtil;
@@ -25,7 +25,7 @@ import com.noveo.android.internship.ridetogether.app.view.viewgroup.adapter.Rout
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteActivity extends BaseMvpActivity implements OnMapReadyCallback, RouteMvpView {
+public class RouteActivity extends BaseViewActivity implements OnMapReadyCallback, RouteView {
     @Bind(R.id.route_list)
     RecyclerView routeView;
     @Bind(R.id.route_toolbar)

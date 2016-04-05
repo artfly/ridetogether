@@ -9,7 +9,7 @@ import butterknife.ButterKnife;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.DynamicHeightImageView;
 
-public class EventStaggeredViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class EventStaggeredViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.event_title_staggered)
     public TextView eventTitleView;
     @Bind(R.id.event_image)
@@ -18,21 +18,9 @@ public class EventStaggeredViewHolder extends RecyclerView.ViewHolder implements
     public TextView eventDateView;
     @Bind(R.id.progressBar)
     public ProgressBar progressBar;
-    private EventClickListener listener;
 
-    public EventStaggeredViewHolder(View view, EventClickListener listener) {
+    public EventStaggeredViewHolder(View view) {
         super(view);
-        this.listener = listener;
         ButterKnife.bind(this, view);
-        view.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        listener.onEventClick(getAdapterPosition());
-    }
-
-    public interface EventClickListener {
-        void onEventClick(int position);
     }
 }

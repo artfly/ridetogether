@@ -12,16 +12,13 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.noveo.android.internship.ridetogether.app.R;
-import com.noveo.android.internship.ridetogether.app.view.bus.event.RideClickEvent;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
-import com.noveo.android.internship.ridetogether.app.view.bus.BusProvider;
-import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.EventStaggeredViewHolder;
-import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.EventStaggeredViewHolder.EventClickListener;
 import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
+import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.EventStaggeredViewHolder;
 
 import java.util.List;
 
-public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredViewHolder> implements EventClickListener {
+public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredViewHolder> {
     private List<Event> events;
     private Context context;
 
@@ -35,7 +32,7 @@ public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredVi
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View eventView = inflater.inflate(R.layout.list_item_event_staggered, parent, false);
 
-        return new EventStaggeredViewHolder(eventView, this);
+        return new EventStaggeredViewHolder(eventView);
     }
 
     @Override
@@ -72,11 +69,5 @@ public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredVi
     @Override
     public int getItemCount() {
         return events.size();
-    }
-
-
-    @Override
-    public void onEventClick(int position) {
-        BusProvider.getInstance().post(new RideClickEvent(events.get(position)));
     }
 }

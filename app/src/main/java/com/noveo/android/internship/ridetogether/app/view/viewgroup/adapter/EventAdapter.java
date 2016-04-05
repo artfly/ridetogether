@@ -51,7 +51,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         switch (EventViewType.values()[viewType]) {
             case EVENT:
                 View eventView = inflater.inflate(R.layout.list_item_event, viewGroup, false);
-                viewHolder = new EventViewHolder(eventView, context);
+                viewHolder = new EventViewHolder(eventView);
                 break;
             case SECTION:
                 View sectionView = inflater.inflate(R.layout.list_item_section, viewGroup, false);

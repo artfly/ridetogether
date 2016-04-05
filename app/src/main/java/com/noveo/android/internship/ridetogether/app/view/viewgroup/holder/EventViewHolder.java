@@ -1,6 +1,5 @@
 package com.noveo.android.internship.ridetogether.app.view.viewgroup.holder;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +8,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.noveo.android.internship.ridetogether.app.R;
-import com.noveo.android.internship.ridetogether.app.view.bus.event.SubscribeEvent;
 import com.noveo.android.internship.ridetogether.app.view.bus.BusProvider;
+import com.noveo.android.internship.ridetogether.app.view.bus.event.SubscribeEvent;
 
 public class EventViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.event_desc)
@@ -22,7 +21,7 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     @Bind(R.id.button_subscribe)
     public Button subscribeButton;
 
-    public EventViewHolder(View view, Context context) {
+    public EventViewHolder(View view) {
         super(view);
         ButterKnife.bind(this, view);
     }

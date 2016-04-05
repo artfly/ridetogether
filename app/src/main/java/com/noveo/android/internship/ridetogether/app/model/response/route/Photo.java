@@ -7,6 +7,7 @@ import org.parceler.Parcel;
 public class Photo {
     @SerializedName("image_path")
     String path;
+    @SerializedName("geometry")
     Point geometry;
 
     public Photo() {

@@ -1,5 +1,6 @@
 package com.noveo.android.internship.ridetogether.app.model.request;
 
+import com.google.gson.annotations.SerializedName;
 import com.noveo.android.internship.ridetogether.app.model.response.route.LineString;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Photo;
 import org.parceler.Parcel;
@@ -8,8 +9,11 @@ import java.util.List;
 
 @Parcel
 public class RequestComment {
+    @SerializedName("text")
     String text;
+    @SerializedName("geometry")
     LineString geometry;
+    @SerializedName("photos")
     List<Photo> photos;
 
     public RequestComment() {

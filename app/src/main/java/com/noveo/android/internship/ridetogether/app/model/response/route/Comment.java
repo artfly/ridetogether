@@ -10,6 +10,7 @@ import java.util.Date;
 public class Comment implements RouteBased {
     @SerializedName("added_at")
     Date date;
+    @SerializedName("content")
     RequestComment content;
     @SerializedName("creator_id")
     int creatorId;
@@ -17,6 +18,7 @@ public class Comment implements RouteBased {
     String imagePath;
     @SerializedName("creator_name")
     String creatorName;
+    @SerializedName("rating")
     float rating;
 
     public Comment(RequestComment content, int creatorId, float rating, Date date) {

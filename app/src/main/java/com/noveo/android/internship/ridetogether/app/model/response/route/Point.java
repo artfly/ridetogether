@@ -1,12 +1,15 @@
 package com.noveo.android.internship.ridetogether.app.model.response.route;
 
+import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 import java.util.List;
 
 @Parcel
 public class Point {
+    @SerializedName("type")
     String type;
+    @SerializedName("coordinates")
     List<Float> coordinates;
 
     public Point() {

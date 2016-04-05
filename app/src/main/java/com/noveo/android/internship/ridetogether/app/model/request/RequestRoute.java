@@ -1,12 +1,16 @@
 package com.noveo.android.internship.ridetogether.app.model.request;
 
+import com.google.gson.annotations.SerializedName;
 import com.noveo.android.internship.ridetogether.app.model.response.route.LineString;
 import org.parceler.Parcel;
 
 @Parcel
 public class RequestRoute {
+    @SerializedName("type")
     String type;
+    @SerializedName("properties")
     RequestProperties properties;
+    @SerializedName("geometry")
     LineString geometry;
 
     public RequestRoute() {

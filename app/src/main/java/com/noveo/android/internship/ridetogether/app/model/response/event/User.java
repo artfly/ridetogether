@@ -5,6 +5,7 @@ import org.parceler.Parcel;
 
 @Parcel
 public class User implements EventBased {
+    @SerializedName("username")
     String username;
     @SerializedName("user_id")
     int userId;

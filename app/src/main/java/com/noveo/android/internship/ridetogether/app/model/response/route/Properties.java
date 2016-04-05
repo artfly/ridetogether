@@ -8,9 +8,13 @@ import java.util.List;
 
 @Parcel
 public class Properties {
+    @SerializedName("name")
     String name;
+    @SerializedName("description")
     String description;
+    @SerializedName("photos")
     List<Photo> photos;
+    @SerializedName("rating")
     float rating;
     @SerializedName("added_at")
     Date date;

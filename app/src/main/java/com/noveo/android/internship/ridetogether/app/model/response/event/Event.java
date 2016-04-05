@@ -14,11 +14,17 @@ public class Event implements EventBased {
     int creatorId;
     @SerializedName("image_path")
     String imagePath;
+    @SerializedName("date")
     Date date;
+    @SerializedName("description")
     String description;
+    @SerializedName("participants")
     List<User> participants;
+    @SerializedName("subscribers")
     List<User> subscribers;
+    @SerializedName("title")
     String title;
+    @SerializedName("id")
     int id;
 
     public Event() {

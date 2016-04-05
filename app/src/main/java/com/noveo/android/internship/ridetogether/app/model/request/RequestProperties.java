@@ -1,5 +1,6 @@
 package com.noveo.android.internship.ridetogether.app.model.request;
 
+import com.google.gson.annotations.SerializedName;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Photo;
 import org.parceler.Parcel;
 
@@ -7,8 +8,11 @@ import java.util.List;
 
 @Parcel
 public class RequestProperties {
+    @SerializedName("name")
     String name;
+    @SerializedName("description")
     String description;
+    @SerializedName("photos")
     List<Photo> photos;
 
     public RequestProperties() {

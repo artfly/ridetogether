@@ -9,8 +9,11 @@ public class RequestEvent {
     int routeId;
     @SerializedName("image_path")
     String imagePath;
+    @SerializedName("description")
     String description;
+    @SerializedName("title")
     String title;
+    @SerializedName("date")
     int date;
 
     public RequestEvent() {

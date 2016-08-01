@@ -2,11 +2,16 @@ package com.noveo.android.internship.ridetogether.app.utils;
 
 import android.location.Location;
 import com.google.android.gms.maps.model.LatLng;
+import com.noveo.android.internship.ridetogether.app.model.request.RequestProperties;
+import com.noveo.android.internship.ridetogether.app.model.request.RequestRoute;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
+import com.noveo.android.internship.ridetogether.app.model.response.route.LineString;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
 import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class RouteUtil {
@@ -51,5 +56,15 @@ public final class RouteUtil {
         List<List<Double>> coordinates = route.getGeometry().getCoordinates();
         List<Double> end = coordinates.get(coordinates.size() - 1);
         return new LatLng(end.get(1), end.get(0));
+    }
+
+    public static RequestRoute createRoute(RequestProperties properties, List<LatLng> markers) {
+        List<List<Double>> coordinates = new ArrayList<>();
+        for (LatLng latLng : markers) {
+            coordinates.add(Arrays.asList(latLng.longitude, latLng.latitude));
+        }
+
+        LineString geometry = new LineString("LineString", coordinates);
+        return new RequestRoute("Feature", properties, geometry);
     }
 }

@@ -9,6 +9,7 @@
         <item name="colorAccent">@color/accent</item>
         <item name="android:windowBackground">@color/window_background</item>
         <item name="colorButtonNormal">@color/button_normal</item>
+        <item name="colorControlActivated">@color/accent</item>
     </style>
 
     <style name="CircularProgress" parent="Theme.AppCompat.Light">
@@ -29,9 +30,10 @@
     </style>
 
     <style name="ToolbarStyle" parent="Theme.AppCompat">
-        <item name="android:textColorPrimary">@color/material_grey_900</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@color/material_blue_grey_900</item>
-        <item name="actionMenuTextColor">@color/material_blue_grey_900</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="android:paddingRight">@dimen/default_padding</item>
         <item name="actionOverflowButtonStyle">@style/Widget.AppCompat.ActionButton.Overflow</item>
     </style>
 </resources>

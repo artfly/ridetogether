@@ -8,26 +8,49 @@ import java.util.List;
 
 @Parcel
 public class Properties {
-    @SerializedName("name")
-    String name;
+    @SerializedName("id")
+    long id;
+    @SerializedName("title")
+    String title;
     @SerializedName("description")
     String description;
-    @SerializedName("photos")
-    List<Photo> photos;
+//    @SerializedName("photos")
+//    List<Photo> photos;
     @SerializedName("rating")
     float rating;
     @SerializedName("added_at")
     Date date;
     @SerializedName("creator_id")
-    int creatorId;
+    long creatorId;
+    @SerializedName("route_type")
+    String routeType;
+    @SerializedName("place_id")
+    String placeId;
 
     public Properties() {
     }
 
-    public Properties(String name, String description, List<Photo> photos) {
-        this.name = name;
+    public Properties(long id, String title, String description, float rating, Date date, long creatorId, String routeType, String placeId) {
+        this.id = id;
+        this.title = title;
         this.description = description;
-        this.photos = photos;
+        this.rating = rating;
+        this.date = date;
+        this.creatorId = creatorId;
+        this.routeType = routeType;
+        this.placeId = placeId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public float getRating() {
@@ -38,19 +61,15 @@ public class Properties {
         return date;
     }
 
-    public int getCreatorId() {
+    public long getCreatorId() {
         return creatorId;
     }
 
-    public String getName() {
-        return name;
+    public String getRouteType() {
+        return routeType;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public List<Photo> getPhotos() {
-        return photos;
+    public String getPlaceId() {
+        return placeId;
     }
 }

@@ -7,4 +7,12 @@
         <item>@string/this_week</item>
         <item>@string/this_month</item>
     </string-array>
+
+    <string-array name="route_types">
+        <item>@string/asphalt</item>
+        <item>@string/gravel</item>
+        <item>@string/sand</item>
+        <item>@string/off_road</item>
+        <item>@string/mixed</item>
+    </string-array>
 </resources>

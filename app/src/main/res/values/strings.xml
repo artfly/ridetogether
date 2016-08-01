@@ -3,9 +3,23 @@
     <string name="events">Events</string>
     <string name="map">Map</string>
     <string name="create_event">Create event</string>
+    <string name="create_route">Route</string>
     <string name="profile">Profile</string>
     <string name="Logout">Logout</string>
     <string name="action_settings">Settings</string>
+
+    <string name="location">Location</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="route_type">Route Type</string>
+
+    <string name="add_image">Add Image</string>
+
+    <string name="email_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="signin">Sign In</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="create_account">Create account</string>
 
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
@@ -27,4 +41,9 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <string name="invalid_item">Invalid list item</string>
+    <string name="mixed">Mixed</string>
+    <string name="off_road">Off-road</string>
+    <string name="sand">Sand</string>
+    <string name="gravel">Gravel</string>
+    <string name="asphalt">Asphalt</string>
 </resources>

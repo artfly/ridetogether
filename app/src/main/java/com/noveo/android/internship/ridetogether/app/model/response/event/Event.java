@@ -26,12 +26,14 @@ public class Event implements EventBased {
     String title;
     @SerializedName("id")
     int id;
+    @SerializedName("added_at")
+    Date addedAt;
 
     public Event() {
     }
 
     public Event(int id, int routeId, Date date, List<User> participants,
-                 List<User> subscribers, String description, String title, String imagePath) {
+                 List<User> subscribers, String description, String title, String imagePath, Date addedAt) {
         this.id = id;
         this.routeId = routeId;
         this.date = date;
@@ -40,6 +42,7 @@ public class Event implements EventBased {
         this.description = description;
         this.title = title;
         this.imagePath = imagePath;
+        this.addedAt = addedAt;
     }
 
     public int getId() {
@@ -76,6 +79,10 @@ public class Event implements EventBased {
 
     public String getImagePath() {
         return imagePath;
+    }
+
+    public Date getAddedAt() {
+        return addedAt;
     }
 
     @Override

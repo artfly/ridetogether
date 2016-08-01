@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,9 @@ import butterknife.Bind;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Events;
-import com.noveo.android.internship.ridetogether.app.presentation.common.BaseFragment;
 import com.noveo.android.internship.ridetogether.app.presentation.common.BaseViewFragment;
 import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
 import com.noveo.android.internship.ridetogether.app.view.bus.BusProvider;
-import com.noveo.android.internship.ridetogether.app.view.bus.event.RefreshEvent;
 import com.noveo.android.internship.ridetogether.app.view.bus.event.RideClickEvent;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.adapter.EventStaggeredAdapter;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.adapter.ItemsClickSupport;
@@ -65,7 +62,7 @@ public class EventsFragment extends BaseViewFragment implements EventListView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupSwipe();
+//        setupSwipe();
         setupRecyclerView();
     }
 
@@ -79,13 +76,12 @@ public class EventsFragment extends BaseViewFragment implements EventListView {
                 .setOnItemClickListener(
                         (recyclerView, position, v) -> {
                             BusProvider.getInstance().post(new RideClickEvent(events.get(position)));
-                            Log.d("HERE", "HERE");
                         });
     }
 
-    private void setupSwipe() {
-        swipeLayout.setOnRefreshListener(() -> presenter.loadEventsInRange(range));
-    }
+//    private void setupSwipe() {
+//        swipeLayout.setOnRefreshListener(() -> presenter.loadEventsInRange(range));
+//    }
 
     @Override
     public void showEvents(List<Event> events) {

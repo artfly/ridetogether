@@ -12,4 +12,6 @@
     <color name="window_background">#FFF5F5F5</color>
     <color name="indigo">#3f51b5</color>
     <color name="button_normal">#689f38</color>
+
+    <color name="button_background">#eceef1</color>
 </resources>

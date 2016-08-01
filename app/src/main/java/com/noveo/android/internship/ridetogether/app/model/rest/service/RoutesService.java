@@ -13,27 +13,27 @@ import java.util.List;
 public interface RoutesService {
 
     @POST("routes")
-    Observable<Route> postRoute(@Header("Token") String token, @Body RequestRoute event);
-
-    @DELETE("routes/{route_id}")
-    Observable<Void> deleteRoute(@Header("Token") String token, @Path("route_id") int routeId);
+    Observable<Route> postRoute(@Header("Authorization") String authorization, @Body RequestRoute event);
 
     @GET("routes")
-    Observable<List<Route>> getRoutes(@Query("count") Integer count,
-                                @Query("offset") Integer offset, @Query("sort") String sortOrder);
+    Observable<List<Route>> getRoutes(@Query("count") Integer count, @Query("place") String place,
+                                      @Query("type") String routeType, @Query("since") Long since);
 
     @GET("routes/{route_id}")
     Observable<Route> getRoute(@Path("route_id") int routeId);
 
-    @POST("routes/{route_id}/comments")
-    Observable<Comment> postComment(@Header("Token") String token,
-                              @Path("route_id") int routeId, @Body RequestComment comment);
-
-    @DELETE("routes/{route_id}/comments/{comment_id}")
-    Observable<Void> deleteComment(@Header("Token") String token,
-                             @Path("route_id") int routeId, @Path("comment_id") int commentId);
+    @DELETE("routes/{route_id}")
+    Observable<Void> deleteRoute(@Header("Authorization") String authorization, @Path("route_id") int routeId);
 
     @GET("routes/{route_id}/comments")
     Observable<List<Comment>> getComments(@Path("route_id") int routeId, @Query("count") Integer count,
-                                          @Query("offset") Integer offset, @Query("sort") String sortOrder);
+                                          @Query("since") Long since);
+
+    @POST("routes/{route_id}/comments")
+    Observable<Comment> postComment(@Header("Authorization") String authorization,
+                              @Path("route_id") int routeId, @Body RequestComment comment);
+
+    @DELETE("routes/{route_id}/comments/{comment_id}")
+    Observable<Void> deleteComment(@Header("Authorization") String authorization,
+                             @Path("route_id") int routeId, @Path("comment_id") int commentId);
 }

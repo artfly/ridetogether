@@ -30,6 +30,18 @@ public class RequestRoute {
         return properties;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setProperties(RequestProperties properties) {
+        this.properties = properties;
+    }
+
+    public void setGeometry(LineString geometry) {
+        this.geometry = geometry;
+    }
+
     public LineString getGeometry() {
         return geometry;
     }

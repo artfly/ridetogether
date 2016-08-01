@@ -15,7 +15,6 @@ import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Comment;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
 import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
-import com.noveo.android.internship.ridetogether.app.presentation.common.BaseActivity;
 import com.noveo.android.internship.ridetogether.app.presentation.common.BaseViewActivity;
 import com.noveo.android.internship.ridetogether.app.utils.IntentUtil;
 import com.noveo.android.internship.ridetogether.app.utils.MapUtil;
@@ -31,7 +30,7 @@ public class RouteActivity extends BaseViewActivity implements OnMapReadyCallbac
     @Bind(R.id.route_toolbar)
     Toolbar toolbar;
 
-    private RoutePresenter presenter = new RoutePresenter();;
+    private RoutePresenter presenter = new RoutePresenter();
 
     private GoogleMap map;
     private Route route;

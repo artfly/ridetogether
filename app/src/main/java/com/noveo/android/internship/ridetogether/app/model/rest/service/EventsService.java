@@ -14,22 +14,22 @@ public interface EventsService {
     Observable<Event> getEvent(@Path("eventId") int eventId);
 
     @GET("events")
-    Observable<List<Event>> getEvents(@Query("count") Integer count,
-                                @Query("since") Long since, @Query("region") Integer region);
+    Observable<List<Event>> getEvents(@Query("place") String place, @Query("count") Integer count,
+                                @Query("since") Long since, @Query("route") String routeType);
 
     @POST("events")
-    Observable<Event> postEvent(@Header("Token") String token, @Body RequestEvent event);
+    Observable<Event> postEvent(@Header("Authorization") String authorization, @Body RequestEvent event);
 
     @DELETE("events/{eventId}")
-    Observable<Void> deleteEvent(@Path("eventId") int eventId, @Header("Token") String token);
+    Observable<Void> deleteEvent(@Header("Authorization") String authorization, @Path("eventId") long eventId);
 
     @PUT("events/{eventId}")
-    Observable<Event> updateEvent(@Path("eventId") int eventId,
-                            @Header("Token") String token, @Body Event event);
+    Observable<Event> updateEvent(@Header("Authorization") String authorization,
+                                  @Path("eventId") int eventId, @Body Event event);
 
     @PUT("events/{eventId}/subscribe")
-    Observable<Event> subscribeToEvent(@Path("eventId") int eventId, @Header("Token") String token);
+    Observable<Event> subscribeToEvent(@Header("Authorization") String authorization, @Path("eventId") int eventId);
 
     @DELETE("events/{eventId}/unsubscribe")
-    Observable<Void> unsubscribeFromEvent(@Path("eventId") int eventId, @Header("Token") String token);
+    Observable<Void> unsubscribeFromEvent(@Header("Authorization") String authorization, @Path("eventId") int eventId);
 }

@@ -2,57 +2,55 @@ package com.noveo.android.internship.ridetogether.app.model.response.route;
 
 import com.google.gson.annotations.SerializedName;
 import com.noveo.android.internship.ridetogether.app.model.request.RequestComment;
+import com.noveo.android.internship.ridetogether.app.model.request.RequestContent;
+import com.noveo.android.internship.ridetogether.app.model.response.event.User;
 import org.parceler.Parcel;
 
 import java.util.Date;
+import java.util.List;
 
 @Parcel
 public class Comment implements RouteBased {
     @SerializedName("added_at")
-    Date date;
+    Date addedAt;
     @SerializedName("content")
-    RequestComment content;
-    @SerializedName("creator_id")
-    int creatorId;
-    @SerializedName("creator_image_path")
-    String imagePath;
-    @SerializedName("creator_name")
-    String creatorName;
+    RequestContent content;
+    @SerializedName("creator")
+    User creator;
+    @SerializedName("id")
+    long id;
     @SerializedName("rating")
-    float rating;
+    int rating;
 
-    public Comment(RequestComment content, int creatorId, float rating, Date date) {
+    public Comment(Date addedAt, RequestContent content, User creator, long id, int rating, List<String> pics) {
+        this.addedAt = addedAt;
         this.content = content;
-        this.creatorId = creatorId;
+        this.creator = creator;
+        this.id = id;
         this.rating = rating;
-        this.date = date;
     }
 
     public Comment() {
     }
 
-    public Date getDate() {
-        return date;
+    public Date getAddedAt() {
+        return addedAt;
     }
 
-    public float getRating() {
-        return rating;
-    }
-
-    public int getCreatorId() {
-        return creatorId;
-    }
-
-    public RequestComment getContent() {
+    public RequestContent getContent() {
         return content;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public User getCreator() {
+        return creator;
     }
 
-    public String getCreatorName() {
-        return creatorName;
+    public long getId() {
+        return id;
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     @Override

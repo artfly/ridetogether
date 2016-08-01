@@ -3,11 +3,16 @@ package com.noveo.android.internship.ridetogether.app.presentation.main.event;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
@@ -50,7 +55,7 @@ public class EventActivity extends BaseViewActivity implements EventView {
 
     @Subscribe
     public void onSubscribeEvent(SubscribeEvent subscribeEvent) {
-        presenter.subscribe(event.getId(), subscribeEvent.getAction());
+        presenter.subscribe(this, event.getId(), subscribeEvent.getAction());
     }
 
 

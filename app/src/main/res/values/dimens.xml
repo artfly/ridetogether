@@ -16,6 +16,8 @@
     <dimen name="default_margin_large">20dp</dimen>
     <dimen name="default_margin_medium">14dp</dimen>
     <dimen name="default_padding">8dp</dimen>
+    <dimen name="default_padding_medium">12dp</dimen>
+    <dimen name="default_padding_large">20dp</dimen>
 
     <dimen name="subscribe_button_width">120dp</dimen>
     <dimen name="subscribe_buttom_height">40dp</dimen>
@@ -63,4 +65,8 @@
     <dimen name="event_date_staggered_text_size">12dp</dimen>
 
     <dimen name="error_text_size">24dp</dimen>
+
+    <dimen name="title_text_size">40dp</dimen>
+
+    <dimen name="action_bar_size">128dp</dimen>
 </resources>

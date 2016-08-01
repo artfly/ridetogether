@@ -9,31 +9,16 @@ import java.util.List;
 
 @Parcel
 public class RequestComment {
-    @SerializedName("text")
-    String text;
-    @SerializedName("geometry")
-    LineString geometry;
-    @SerializedName("photos")
-    List<Photo> photos;
-
+    @SerializedName("content")
+    RequestContent content;
     public RequestComment() {
     }
 
-    public RequestComment(String text, LineString geometry, List<Photo> photos) {
-        this.text = text;
-        this.geometry = geometry;
-        this.photos = photos;
+    public RequestComment(RequestContent content) {
+        this.content = content;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public LineString getGeometry() {
-        return geometry;
-    }
-
-    public List<Photo> getPhotos() {
-        return photos;
+    public RequestContent getContent() {
+        return content;
     }
 }

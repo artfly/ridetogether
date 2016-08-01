@@ -77,6 +77,12 @@ public final class MapUtil {
                 .icon(BitmapDescriptorFactory.defaultMarker(MARKER_COLOR_HUE)));
     }
 
+    public static Marker addMarker(GoogleMap map, LatLng position) {
+        return map.addMarker(new MarkerOptions()
+                .position(position)
+                .icon(BitmapDescriptorFactory.defaultMarker(MARKER_COLOR_HUE)));
+    }
+
     public static GeoJsonLayer addRouteToMap(final GoogleMap map, Route route) {
         JSONObject routeObject;
         try {
@@ -96,22 +102,35 @@ public final class MapUtil {
         return layer;
     }
 
+    public static Polyline addPolyline(final GoogleMap map, LatLng from, LatLng to) {
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.color(ROUTE_COLOR_INT);
+        polylineOptions.width(ROUTE_WEIGHT);
+        polylineOptions.add(from, to);
+        return map.addPolyline(polylineOptions);
+    }
+
     public static void animateCameraToRoute(final GoogleMap map, GeoJsonLayer layer) {
         final CameraUpdate update = getLineStringPosition(layer);
         if (update != null) {
-            map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-                @Override
-                public void onCameraChange(CameraPosition arg0) {
-                    map.moveCamera(update);
-                    CameraPosition position = CameraPosition.builder()
-                            .target(map.getCameraPosition().target)
-                            .zoom(map.getCameraPosition().zoom - 1)
-                            .build();
-                    map.animateCamera(CameraUpdateFactory.newCameraPosition(position));
-                    map.setOnCameraChangeListener(null);
-                }
+            map.setOnCameraChangeListener(arg0 -> {
+                map.moveCamera(update);
+                CameraPosition position = CameraPosition.builder()
+                        .target(map.getCameraPosition().target)
+                        .zoom(map.getCameraPosition().zoom - 1)
+                        .build();
+                map.animateCamera(CameraUpdateFactory.newCameraPosition(position));
+                map.setOnCameraChangeListener(null);
             });
         }
+    }
+
+    public static void animateCameraToPosition(final GoogleMap map, LatLng location) {
+        CameraPosition cameraPosition = CameraPosition.builder()
+                .target(location)
+                .zoom(12)
+                .build();
+        map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     public static CameraUpdate getLineStringPosition(GeoJsonLayer layer) {

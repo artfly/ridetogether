@@ -9,8 +9,8 @@ public class RoutePresenter extends BasePresenter<RouteView> {
     private RoutesService routesService;
 
     @Override
-    public void attachView(RouteView routeMvpView) {
-        this.view = routeMvpView;
+    public void attachView(RouteView routeView) {
+        this.view = routeView;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class RoutePresenter extends BasePresenter<RouteView> {
             RideTogetherClient client = RideTogetherClient.getInstance();
             routesService = client.getRoutesService();
         }
-        subscription = routesService.getComments(routeId, null, null, null)
+        subscription = routesService.getComments(routeId, null, null)
                 .compose(SchedulerTransformer.applySchedulers())
                 .subscribe(comments -> view.showComments(comments));
     }

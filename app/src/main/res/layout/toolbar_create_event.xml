@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+        android:id="@+id/event_create_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_size"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="@color/primary"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    android:textSize="@dimen/abc_text_size_large_material"
+    android:hint="@string/title"/>
+</android.support.v7.widget.Toolbar>

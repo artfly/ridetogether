@@ -3,6 +3,7 @@ package com.noveo.android.internship.ridetogether.app.view.viewgroup.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.noveo.android.internship.ridetogether.app.R;
 import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
+import com.noveo.android.internship.ridetogether.app.model.rest.RideTogetherClient;
 import com.noveo.android.internship.ridetogether.app.utils.EventUtil;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.EventStaggeredViewHolder;
 
@@ -41,8 +43,9 @@ public class EventStaggeredAdapter extends RecyclerView.Adapter<EventStaggeredVi
         holder.eventTitleView.setText(event.getTitle());
         holder.eventDateView.setText(EventUtil.dateToTimedString(event.getDate(), context));
         holder.progressBar.setVisibility(View.VISIBLE);
+        Log.d("GlidePath", RideTogetherClient.getImageUrl(event.getImagePath()));
         Glide.with(context)
-                .load(event.getImagePath())
+                .load(RideTogetherClient.getImageUrl(event.getImagePath()))
                 .asBitmap()
                 .listener(new RequestListener<String, Bitmap>() {
                     @Override

@@ -8,31 +8,41 @@ import java.util.List;
 
 @Parcel
 public class RequestProperties {
-    @SerializedName("name")
-    String name;
+    @SerializedName("title")
+    String title;
+    @SerializedName("place_id")
+    String placeId;
     @SerializedName("description")
     String description;
-    @SerializedName("photos")
-    List<Photo> photos;
+    @SerializedName("route_type")
+    String routeType;
+    //TODO
+//    @SerializedName("photos")
+//    List<Photo> photos;
 
     public RequestProperties() {
     }
 
-    public RequestProperties(String name, String description, List<Photo> photos) {
-        this.name = name;
+    public RequestProperties(String title, String placeId, String description, String routeType) {
+        this.title = title;
+        this.placeId = placeId;
         this.description = description;
-        this.photos = photos;
+        this.routeType = routeType;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPlaceId() {
+        return placeId;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public String getRouteType() {
+        return routeType;
     }
 }

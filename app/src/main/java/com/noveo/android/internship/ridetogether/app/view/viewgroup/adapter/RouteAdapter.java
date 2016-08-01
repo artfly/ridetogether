@@ -15,6 +15,7 @@ import com.noveo.android.internship.ridetogether.app.model.response.route.Commen
 import com.noveo.android.internship.ridetogether.app.model.response.route.Properties;
 import com.noveo.android.internship.ridetogether.app.model.response.route.Route;
 import com.noveo.android.internship.ridetogether.app.model.response.route.RouteBased;
+import com.noveo.android.internship.ridetogether.app.model.rest.RideTogetherClient;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.CommentViewHolder;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.ErrorViewHolder;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.RouteViewHolder;
@@ -74,16 +75,16 @@ public class RouteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             holder.description.setText(properties.getDescription());
             holder.distance.setText(RouteUtil.getRouteDistance(route.getGeometry().getCoordinates()));
             holder.rating.setText(String.valueOf(properties.getRating()));
-            holder.title.setText(properties.getName());
+            holder.title.setText(properties.getTitle());
         }
     }
 
     private void configureCommentViewHolder(final CommentViewHolder holder, int position) {
         Comment comment = (Comment) items.get(position);
         if (comment != null) {
-            holder.creator.setText(comment.getCreatorName());
+            holder.creator.setText(comment.getCreator().getUsername());
             Glide.with(context)
-                    .load(comment.getImagePath())
+                    .load(RideTogetherClient.getImageUrl(comment.getCreator().getImagePath()))
                     .asBitmap()
                     .centerCrop()
                     .into(new BitmapImageViewTarget(holder.avatar) {
@@ -95,7 +96,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                             holder.avatar.setImageDrawable(circular);
                         }
                     });
-            holder.date.setText(EventUtil.dateToString(comment.getDate()));
+            holder.date.setText(EventUtil.dateToString(comment.getAddedAt()));
             holder.text.setText(comment.getContent().getText());
         }
     }

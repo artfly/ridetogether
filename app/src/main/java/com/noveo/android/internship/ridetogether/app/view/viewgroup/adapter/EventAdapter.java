@@ -15,6 +15,7 @@ import com.noveo.android.internship.ridetogether.app.model.response.event.Event;
 import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased;
 import com.noveo.android.internship.ridetogether.app.model.response.event.EventBased.EventViewType;
 import com.noveo.android.internship.ridetogether.app.model.response.event.User;
+import com.noveo.android.internship.ridetogether.app.model.rest.RideTogetherClient;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.Section;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.ErrorViewHolder;
 import com.noveo.android.internship.ridetogether.app.view.viewgroup.holder.EventViewHolder;
@@ -99,7 +100,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         if (user != null) {
             holder.username.setText(user.getUsername());
             Glide.with(context)
-                    .load(user.getImagePath())
+                    .load(RideTogetherClient.getImageUrl(user.getImagePath()))
                     .asBitmap()
                     .centerCrop()
                     .into(new BitmapImageViewTarget(holder.avatar) {
